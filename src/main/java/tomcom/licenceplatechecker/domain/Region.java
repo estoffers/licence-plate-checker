@@ -1,23 +1,22 @@
 package tomcom.licenceplatechecker.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Entity
 public class Region {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    public Long id;
 
+    @Column(nullable = false)
     public String label;
+    @Column(nullable = false)
     public String code;
+    @Column(nullable = false)
     public Boolean deprecated;
+    @Column(nullable = false)
     public Boolean special;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

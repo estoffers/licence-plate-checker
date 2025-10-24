@@ -1,10 +1,10 @@
 package tomcom.licenceplatechecker.rest;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import tomcom.licenceplatechecker.application.LicencePlatePresenter;
+import tomcom.licenceplatechecker.domain.LicencePlate;
 import tomcom.licenceplatechecker.domain.LicencePlateValidationService;
 
 @RestController
@@ -16,12 +16,10 @@ class LicencePlateApi {
         this.licencePlateValidationService = licencePlateValidationService;
     }
 
-    @PostMapping("/validate")
-    public ResponseEntity<String> validateLicencePlate(@RequestBody String licencePlate) {
-        boolean isValid = licencePlateValidationService.validateLicencePlate(licencePlate);
-        if (!isValid)
-            return ResponseEntity.badRequest().body("Invalid licence plate");
-        return ResponseEntity.ok(licencePlate);
+    @PostMapping(value = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> validateLicencePlate(@RequestBody ValidationRequest validationRequest) {
+        LicencePlate validLicencePlate = licencePlateValidationService.validateLicencePlate(validationRequest.licencePlate);
+        return ResponseEntity.ok(new LicencePlatePresenter().present(validLicencePlate));
     }
-
 }

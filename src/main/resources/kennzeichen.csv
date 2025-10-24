@@ -1,0 +1,798 @@
+Code,Label,Deprecated,Special
+A,Augsburg,false,false
+AA,Ostalbkreis,false,false
+AB,Aschaffenburg,false,false
+ABG,Altenburger Land,false,false
+ABI,Anhalt-Bitterfeld,false,false
+AC,Aachen,false,false
+AE,Vogtlandkreis,false,false
+AH,Borken,false,false
+AIB,"München, Rosenheim",false,false
+AIC,Aichach-Friedberg,false,false
+AK,Altenkirchen (Westerwald),false,false
+ALF,Hildesheim,false,false
+ALZ,Aschaffenburg,false,false
+AM,"Amberg, Stadt",false,false
+AN,Ansbach,false,false
+ANA,Erzgebirgskreis,false,false
+ANG,Uckermark,false,false
+ANK,Vorpommern-Greifswald,false,false
+AP,Weimarer Land,false,false
+APD,Weimarer Land,false,false
+ARN,Ilm-Kreis,false,false
+ART,Kyffhäuserkreis,false,false
+AS,Amberg-Sulzbach,false,false
+ASL,Salzlandkreis,false,false
+ASZ,Erzgebirgskreis,false,false
+AT,Mecklenburgische Seenplatte,false,false
+AU,Erzgebirgskreis,false,false
+AUR,Aurich,false,false
+AW,Ahrweiler,false,false
+AZ,Alzey-Worms,false,false
+AZE,Anhalt-Bitterfeld,false,false
+AÖ,Altötting,false,false
+B,Berlin,false,false
+BA,Bamberg,false,false
+BAD,"Baden-Baden, Stadt",false,false
+BAR,Barnim,false,false
+BB,Böblingen,false,false
+BBG,Salzlandkreis,false,false
+BC,Biberach,false,false
+BCH,Neckar-Odenwald-Kreis,false,false
+BE,Warendorf,false,false
+BED,Mittelsachsen,false,false
+BER,Barnim,false,false
+BF,Steinfurt,false,false
+BGD,Berchtesgadener Land,false,false
+BGL,Berchtesgadener Land,false,false
+BH,"Ortenaukreis, Raststatt",false,false
+BI,"Bielefeld, Stadt",false,false
+BID,Marburg-Biedenkopf,false,false
+BIN,Mainz-Bingen,false,false
+BIR,Birkenfeld,false,false
+BIT,Eifelkreis Bitburg-Prüm,false,false
+BIW,Bautzen,false,false
+BK,"Börde, Rems-Murr-Kreis, Schwäbisch Hall",false,false
+BKS,Bernkastel-Wittlich,false,false
+BL,Zollernalbkreis,false,false
+BLB,Siegen-Wittgenstein,false,false
+BLK,Burgenlandkreis,false,false
+BM,Rhein-Erft-Kreis,false,false
+BN,"Bonn, Stadt",false,false
+BNA,Leipzig,false,false
+BO,"Bochum, Stadt",false,false
+BOG,Straubing-Bogen,false,false
+BOH,Borken,false,false
+BOR,Borken,false,false
+BOT,"Bottrop, Stadt",false,false
+BR,Landkreis Karlsruhe,false,false
+BRA,Wesermarsch,false,false
+BRB,"Brandenburg, Stadt",false,false
+BRG,Jerichower Land,false,false
+BRK,Bad Kissingen,false,false
+BRL,Goslar,false,false
+BRV,Rotenburg (Wümme),false,false
+BS,"Braunschweig, Stadt",false,false
+BSB,Osnabrück,false,false
+BSK,Oder-Spree,false,false
+BT,Bayreuth,false,false
+BTF,Anhalt-Bitterfeld,false,false
+BUL,"Amberg-Sulzbach, Schwandorf",false,false
+BZ,Bautzen,false,false
+BÖ,Börde,false,false
+BÜD,Wetteraukreis,false,false
+BÜR,Paderborn,false,false
+BÜS,"Konstanz, Gemeinde Büsingen am Hochrhein",false,false
+BÜZ,"Rostock, Landkreis",false,false
+C,"Chemnitz, Stadt",false,false
+CA,Oberspreewald-Lausitz,false,false
+CAS,Recklinghausen,false,false
+CB,"Cottbus, Stadt",false,false
+CE,Celle,false,false
+CHA,Cham,false,false
+CLP,Cloppenburg,false,false
+CLZ,Goslar,false,false
+CO,"Zulassungsstelle Coburg, Zweckverband",false,false
+COC,Cochem-Zell,false,false
+COE,Coesfeld,false,false
+CR,Schwäbisch Hall,false,false
+CUX,Cuxhaven,false,false
+CW,Calw,false,false
+D,"Düsseldorf, Stadt",false,false
+DA,Darmstadt,false,false
+DAH,Dachau,false,false
+DAN,Lüchow-Dannenberg,false,false
+DAU,Vulkaneifel,false,false
+DBR,"Rostock, Landkreis",false,false
+DD,"Dresden, Stadt",false,false
+DE,"Dessau-Roßlau, Stadt",false,false
+DEG,Deggendorf,false,false
+DEL,"Delmenhorst, Stadt",false,false
+DGF,Dingolfing-Landau,false,false
+DH,Diepholz,false,false
+DI,Darmstadt-Dieburg,false,false
+DIL,Lahn-Dill-Kreis,false,false
+DIN,Wesel,false,false
+DIZ,Rhein-Lahn-Kreis,false,false
+DKB,Ansbach,false,false
+DL,Mittelsachsen,false,false
+DLG,Dillingen an der Donau,false,false
+DM,Mecklenburgische Seenplatte,false,false
+DN,Düren,false,false
+DO,"Dortmund, Stadt",false,false
+DON,Donau-Ries in Donauwörth,false,false
+DS,Schwarzwald-Baar-Kreis,false,false
+DU,"Duisburg, Stadt",false,false
+DUD,Göttingen,false,false
+DW,Sächsische Schweiz-Osterzgebirge,false,false
+DZ,Nordsachsen,false,false
+DÜW,Bad Dürkheim,false,false
+E,"Essen, Stadt",false,false
+EA,Wartburgkreis,false,false
+EB,Nordsachsen,false,false
+EBE,Ebersberg,false,false
+EBN,Haßberge,false,false
+EBS,"Bayreuth, Forchheim, Kulmbach",false,false
+ECK,Rendsburg-Eckernförde,false,false
+ED,Erding,false,false
+EE,Elbe-Elster,false,false
+EF,"Erfurt, Stadt",false,false
+EG,Rottal-Inn,false,false
+EH,Oder-Spree,false,false
+EI,Eichstätt,false,false
+EIC,Eichsfeld,false,false
+EIL,Mansfeld-Südharz,false,false
+EIN,Northeim,false,false
+EIS,Saale-Holzland-Kreis,false,false
+EL,Emsland,false,false
+EM,Emmendingen,false,false
+EMD,"Emden, Stadt",false,false
+EMS,Rhein-Lahn-Kreis,false,false
+EN,Ennepe-Ruhr-Kreis,false,false
+ER,"Erlangen, Stadt",false,false
+ERB,Odenwaldkreis,false,false
+ERH,Erlangen-Höchstadt,false,false
+ERK,Heinsberg,false,false
+ERZ,Erzgebirgskreis,false,false
+ES,Esslingen,false,false
+ESB,"Amberg-Sulzbach, Bayreuth, Neustadt a. d. Waldnaab, Nürnberger Land",false,false
+ESW,Werra-Meißner-Kreis,false,false
+EU,Euskirchen,false,false
+EW,Barnim,false,false
+F,"Frankfurt/Main, Stadt",false,false
+FB,Wetteraukreis in Friedberg Hessen,false,false
+FD,Fulda,false,false
+FDB,Aichach-Friedberg,false,false
+FDS,Freudenstadt,false,false
+FEU,Ansbach,false,false
+FF,"Frankfurt (Oder), Stadt",false,false
+FFB,Fürstenfeldbruck,false,false
+FG,Mittelsachsen,false,false
+FI,Elbe-Elster,false,false
+FKB,Waldeck-Frankenberg,false,false
+FL,Flensburg,false,false
+FLÖ,Mittelsachsen,false,false
+FN,Bodenseekreis,false,false
+FO,Forchheim,false,false
+FOR,Spree-Neiße,false,false
+FR,"Freiburg im Breisgau, Stadt, Breisgau-Hochschwarzwald",false,false
+FRG,Freyung-Grafenau,false,false
+FRI,Friesland,false,false
+FRW,Märkisch-Oderland,false,false
+FS,"Freising, Moosburg",false,false
+FT,"Frankenthal (Pfalz), Stadt",false,false
+FTL,Sächsische Schweiz-Osterzgebirge,false,false
+FW,Oder-Spree,false,false
+FZ,Schwalm-Eder-Kreis,false,false
+FÜ,Fürth,false,false
+FÜS,Ostallgäu,false,false
+G,"Gera, Stadt",false,false
+GA,Altmarkkreis Salzwedel,false,false
+GAN,Northeim,false,false
+GAP,Garmisch-Partenkirchen,false,false
+GC,Zwickau,false,false
+GD,Ostalbkreis,false,false
+GDB,Nordwestmecklenburg,false,false
+GE,"Gelsenkirchen, Stadt",false,false
+GEL,Kleve,false,false
+GEO,"Haßberge, Schweinfurt",false,false
+GER,Germersheim,false,false
+GF,Gifhorn,false,false
+GG,Groß-Gerau,false,false
+GHA,Leipzig,false,false
+GHC,Wittenberg,false,false
+GI,Gießen,false,false
+GK,Heinsberg,false,false
+GL,Rheinisch-Bergischer Kreis,false,false
+GLA,Recklinghausen,false,false
+GM,Oberbergischer Kreis,false,false
+GMN,Vorpommern-Rügen,false,false
+GN,Main-Kinzig-Kreis,false,false
+GNT,Jerichower Land,false,false
+GOA,Rhein-Hunsrück-Kreis,false,false
+GOH,Rhein-Lahn-Kreis,false,false
+GP,Göppingen,false,false
+GR,Görlitz,false,false
+GRA,Freyung-Grafenau,false,false
+GRH,Meißen,false,false
+GRI,Rottal-Inn,false,false
+GRM,Leipzig,false,false
+GRZ,Greiz,false,false
+GS,Goslar,false,false
+GT,Gütersloh,false,false
+GTH,Gotha,false,false
+GUB,Spree-Neiße,false,false
+GUN,Weißenburg-Gunzenhausen,false,false
+GV,Rhein-Kreis Neuss,false,false
+GVM,Nordwestmecklenburg,false,false
+GW,Vorpommern-Greifswald,false,false
+GZ,Günzburg,false,false
+GÖ,Göttingen,false,false
+GÜ,Landkreis Rostock,false,false
+H,Hannover,false,false
+HA,"Hagen, Stadt",false,false
+HAB,Bad Kissingen,false,false
+HAL,"Halle, Stadt",false,false
+HAM,"Hamm, Stadt",false,false
+HAS,Haßberge,false,false
+HB,Freie Hansestadt Bremen,false,false
+HBN,Hildburghausen,false,false
+HBS,Harz,false,false
+HC,Mittelsachsen,false,false
+HCH,"Freudenstadt, Zollernalbkreis",false,false
+HD,"Heidelberg, Stadt, Rhein-Neckar-, Kreis",false,false
+HDH,Heidenheim,false,false
+HDL,Börde,false,false
+HE,Helmstedt,false,false
+HEB,Nürnberger Land,false,false
+HEF,Hersfeld-Rotenburg,false,false
+HEI,Dithmarschen,false,false
+HER,"Herne, Stadt",false,false
+HET,Mansfeld-Südharz,false,false
+HF,Herford,false,false
+HG,Hochtaunuskreis,false,false
+HGN,Ludwigslust-Parchim,false,false
+HGW,Hansestadt Greifswald,false,false
+HH,Freie und Hansestadt Hamburg,false,false
+HHM,Burgenlandkreis,false,false
+HI,Hildesheim,false,false
+HIG,Eichsfeld,false,false
+HIP,Roth,false,false
+HK,Heidekreis,false,false
+HL,Hansestadt Lübeck,false,false
+HM,Hameln-Pyrmont,false,false
+HMÜ,Göttingen,false,false
+HN,Heilbronn,false,false
+HO,Hof,false,false
+HOG,Kassel,false,false
+HOH,Haßberge,false,false
+HOL,Holzminden,false,false
+HOM,Saarpfalz-Kreis außer Stadt St. Ingbert (IGB),false,false
+HOR,Freudenstadt,false,false
+HOT,Zwickau,false,false
+HP,Bergstraße,false,false
+HR,Schwalm-Eder-Kreis,false,false
+HRO,Hansestadt Rostock,false,false
+HS,Heinsberg,false,false
+HSK,Hochsauerlandkreis,false,false
+HST,"Hansestadt Stralsund, Stadt",false,false
+HU,"Hanau, Main-Kinzig-Kreis",false,false
+HV,Stendal,false,false
+HVL,Havelland,false,false
+HWI,Hansestadt Wismar,false,false
+HX,Höxter,false,false
+HY,Bautzen,false,false
+HZ,Harz,false,false
+HÖS,Erlangen-Höchstadt,false,false
+IGB,"St. Ingbert, Stadt",false,false
+IK,Ilm-Kreis,false,false
+IL,Ilm-Kreis,false,false
+ILL,Neu-Ulm,false,false
+IN,"Ingolstadt, Stadt",false,false
+IZ,Steinburg,false,false
+J,"Jena, Stadt",false,false
+JB,Teltow-Fläming,false,false
+JE,Wittenberg,false,false
+JL,Jerichower Land,false,false
+JÜL,Düren,false,false
+K,"Köln, Stadt",false,false
+KA,Karlsruhe,false,false
+KB,Waldeck-Frankenberg,false,false
+KC,Kronach,false,false
+KE,"Kempten (Allgäu), Stadt",false,false
+KEH,Kelheim,false,false
+KEL,Ortenaukreis,false,false
+KEM,"Bayreuth, Tirschenreuth",false,false
+KF,"Kaufbeuren, Stadt",false,false
+KG,Bad Kissingen,false,false
+KH,Bad Kreuznach,false,false
+KI,Kiel,false,false
+KIB,Donnersbergkreis,false,false
+KK,Viersen,false,false
+KL,Kaiserslautern,false,false
+KLE,Kleve,false,false
+KLZ,Altmarkkreis Salzwedel,false,false
+KM,Bautzen,false,false
+KN,Konstanz,false,false
+KO,"Koblenz, Stadt",false,false
+KR,"Krefeld, Stadt",false,false
+KRU,Günzburg,false,false
+KS,Kassel,false,false
+KT,Kitzingen,false,false
+KU,Kulmbach,false,false
+KUS,Kusel,false,false
+KW,Dahme-Spreewald,false,false
+KY,Ostprignitz-Ruppin,false,false
+KYF,Kyffhäuserkreis,false,false
+KÖN,Rhön-Grabfeld,false,false
+KÖT,Anhalt-Bitterfeld,false,false
+KÖZ,Cham,false,false
+KÜN,Hohenlohekreis,false,false
+L,Leipzig,false,false
+LA,Landshut,false,false
+LAN,Dingolfing-Landau,false,false
+LAU,Nürnberger Land,false,false
+LB,Ludwigsburg,false,false
+LBS,Saale-Orla-Kreis,false,false
+LBZ,Ludwigslust-Parchim,false,false
+LC,Dahme-Spreewald,false,false
+LD,"Landau in der Pfalz, Stadt",false,false
+LDK,"Lahn-Dill-Kreis in Wetzlar, Kreis",false,false
+LDS,Dahme-Spreewald,false,false
+LEO,Böblingen,false,false
+LER,Leer,false,false
+LEV,"Leverkusen, Stadt",false,false
+LF,"Altötting, Berchtesgadener Land,Traunstein",false,false
+LG,Lüneburg,false,false
+LH,"Coesfeld, Unna",false,false
+LI,Lindau (Bodensee),false,false
+LIB,Elbe-Elster,false,false
+LIF,Lichtenfels,false,false
+LIP,Lippe,false,false
+LL,Landsberg am Lech,false,false
+LM,Limburg-Weilburg,false,false
+LN,Dahme-Spreewald,false,false
+LOS,Oder-Spree,false,false
+LP,Soest,false,false
+LR,Ortenaukreis,false,false
+LRO,"Rostock, Landkreis",false,false
+LSZ,Unstrut-Hainich-Kreis,false,false
+LU,Ludwigshafen am Rhein,false,false
+LUK,Teltow-Fläming,false,false
+LUP,Ludwigslust-Parchim,false,false
+LWL,Ludwigslust-Parchim,false,false
+LÖ,Lörrach,false,false
+LÖB,Görlitz,false,false
+LÜN,Unna,false,false
+M,München,false,false
+MA,"Mannheim, Stadt",false,false
+MAB,Erzgebirgskreis,false,false
+MAI,"Kelheim, Landshut",false,false
+MAK,Wunsiedel i. Fichtelgebirge,false,false
+MAL,Landshut Straubing-Bogen,false,false
+MB,Miesbach,false,false
+MC,Mecklenburgische Seenplatte,false,false
+MD,"Magdeburg, Stadt",false,false
+ME,Mettmann,false,false
+MED,Dithmarschen,false,false
+MEG,Schwalm-Eder-Kreis,false,false
+MEI,Meißen,false,false
+MEK,Erzgebirgskreis,false,false
+MEL,Osnabrück,false,false
+MER,Saalekreis,false,false
+MET,Rhön-Grabfeld,false,false
+MG,"Mönchengladbach, Stadt",false,false
+MGH,Main-Tauber-Kreis,false,false
+MGN,Schmalkalden-Meiningen,false,false
+MH,"Mülheim an der Ruhr, Stadt",false,false
+MHL,Unstrut-Hainich-Kreis,false,false
+MI,Minden-Lübbecke,false,false
+MIL,Miltenberg,false,false
+MK,Märkischer Kreis,false,false
+MKK,Main-Kinzig-Kreis,false,false
+ML,Mansfeld-Südharz,false,false
+MM,"Memmingen, Stadt",false,false
+MN,Unterallgäu,false,false
+MO,Wesel,false,false
+MOD,Ostallgäu,false,false
+MOL,Märkisch-Oderland,false,false
+MON,"Aachen, Düren",false,false
+MOS,Neckar-Odenwald-Kreis,false,false
+MQ,Saalekreis,false,false
+MR,Marburg-Biedenkopf,false,false
+MS,"Münster, Stadt",false,false
+MSE,Mecklenburgische Seenplatte,false,false
+MSH,Mansfeld-Südharz,false,false
+MSP,Main-Spessart,false,false
+MST,Mecklenburgische Seenplatte,false,false
+MTK,Main-Taunus-Kreis,false,false
+MTL,Leipzig,false,false
+MUC,"München, Stadt",false,false
+MW,Mittelsachsen,false,false
+MY,Mayen-Koblenz,false,false
+MYK,Mayen-Koblenz,false,false
+MZ,Mainz,false,false
+MZG,Merzig-Wadern,false,false
+MÜ,Mühldorf am Inn,false,false
+MÜB,"Bayreuth, Hof",false,false
+MÜL,Breisgau-Hochschwarzwald,false,false
+MÜR,Mecklenburgische Seenplatte,false,false
+N,"Nürnberg Stadt, Nürnberger Land",false,false
+NAB,"Amberg-Sulzbach, Schwandorf",false,false
+NAI,Hof,false,false
+NAU,Havelland,false,false
+NB,"Neubrandenburg, Stadt",false,false
+ND,Neuburg-Schrobenhausen,false,false
+NDH,Nordhausen,false,false
+NE,Rhein-Kreis Neuss,false,false
+NEA,Neustadt an der Aisch-Bad Winsheim,false,false
+NEB,Burgenlandkreis,false,false
+NEC,"Zulassungsstelle Coburg, Zweckverband",false,false
+NEN,Schwandorf,false,false
+NES,Rhön-Grabfeld,false,false
+NEU,Breisgau-Hochschwarzwald,false,false
+NEW,Neustadt an der Waldnaab,false,false
+NF,Nordfriesland,false,false
+NH,Sonneberg,false,false
+NI,Nienburg (Weser),false,false
+NK,Neunkirchen Saar,false,false
+NM,Neumarkt in der Oberpfalz,false,false
+NMB,Burgenlandkreis,false,false
+NMS,Neumünster,false,false
+NOH,Grafschaft Bentheim,false,false
+NOL,Görlitz,false,false
+NOM,Northeim,false,false
+NOR,Aurich,false,false
+NP,Ostprignitz-Ruppin,false,false
+NR,Neuwied,false,false
+NT,Esslingen,false,false
+NU,Neu-Ulm,false,false
+NVP,Vorpommern-Rügen,false,false
+NW,Neustadt an der Weinstraße,false,false
+NWM,Nordwestmecklenburg,false,false
+NY,Görlitz,false,false
+NZ,Mecklenburgische Seenplatte,false,false
+NÖ,Donau-Ries,false,false
+OA,Oberallgäu,false,false
+OAL,Ostallgäu,false,false
+OB,"Oberhausen, Stadt",false,false
+OBB,Miltenberg,false,false
+OBG,Stendal,false,false
+OC,Börde,false,false
+OCH,Würzburg,false,false
+OD,Stormarn,false,false
+OE,Olpe,false,false
+OF,Offenbach am Main,false,false
+OG,Ortenaukreis,false,false
+OH,Ostholstein,false,false
+OHA,Göttingen,false,false
+OHV,Oberhavel,false,false
+OHZ,Osterholz,false,false
+OK,Börde,false,false
+OL,Oldenburg (Oldenburg),false,false
+OP,"Leverkusen, Stadt",false,false
+OPR,Ostprignitz-Ruppin,false,false
+OS,Osnabrück,false,false
+OSL,Oberspreewald-Lausitz,false,false
+OTW,Neunkirchen,false,false
+OVI,Schwandorf,false,false
+OVL,Vogtlandkreis,false,false
+OVP,Vorpommern-Greifswald,false,false
+OZ,Nordsachsen,false,false
+P,"Potsdam, Stadt",false,false
+PA,Passau,false,false
+PAF,Pfaffenhofen a. d. Ilm,false,false
+PAN,Rottal-Inn,false,false
+PAR,"Kehlheim, Neumarkt i. d. Opf.",false,false
+PB,Paderborn,false,false
+PCH,Ludwigslust-Parchim,false,false
+PE,Peine,false,false
+PEG,"Bayreuth, Forchheim, Nürnberger Land",false,false
+PF,"Pforzheim, Stadt, Enzkreis",false,false
+PI,Pinneberg,false,false
+PIR,Sächsische Schweiz-Osterzgebirge,false,false
+PL,Vogtlandkreis,false,false
+PLÖ,Plön,false,false
+PM,Potsdam-Mittelmark,false,false
+PN,Saale-Orla-Kreis,false,false
+PR,Prignitz,false,false
+PRÜ,Eifelkreis Bitburg-Prüm,false,false
+PS,"Pirmasens, Stadt, Südwestpfalz",false,false
+PW,Vorpommern-Greifswald,false,false
+PZ,Uckermark,false,false
+QFT,Saalekreis,false,false
+QLB,Harz,false,false
+R,Regensburg,false,false
+RA,Rastat,false,false
+RC,Vogtlandkreis,false,false
+RD,Rendsburg-Eckernförde,false,false
+RDG,Vorpommern-Rügen,false,false
+RE,Recklinghausen,false,false
+REG,Regen,false,false
+REH,"Hof, Wunsiedel im Fichtelgebirge",false,false
+REI,Berchtesgadener Land,false,false
+RG,Meißen,false,false
+RH,Roth,false,false
+RI,Schaumburg,false,false
+RID,Kelheim,false,false
+RIE,Meißen,false,false
+RL,Mittelsachsen,false,false
+RM,Mecklenburgische Seenplatte,false,false
+RN,Havelland,false,false
+RO,Rosenheim,false,false
+ROD,"Cham, Schwandorf",false,false
+ROF,Hersfeld-Rotenburg,false,false
+ROK,Donnersbergkreis,false,false
+ROL,"Kelheim, Landshut",false,false
+ROS,"Rostock, Landkreis",false,false
+ROT,Ansbach,false,false
+ROW,Rotenburg (Wümme),false,false
+RP,Rhein-Pfalz-Kreis,false,false
+RS,"Remscheid, Stadt",false,false
+RSL,"Dessau-Roßlau, Stadt",false,false
+RT,Reutlingen,false,false
+RU,Saalfeld-Rudolstadt,false,false
+RV,Ravensburg,false,false
+RW,Rottweil,false,false
+RZ,Herzogtum Lauenburg,false,false
+RÜD,Rheingau-Taunus Kreis,false,false
+RÜG,Vorpommern-Rügen,false,false
+S,"Stuttgart, Stadt",false,false
+SAB,Trier-Saarburg,false,false
+SAD,Schwandorf,false,false
+SAN,"Hof, Kronach, Kulmbach",false,false
+SAW,Altmarkkreis Salzwedel,false,false
+SB,"Saarbrücken, Stadt und Stadtverband außer Völklingen, Stadt (VK)",false,false
+SBG,Vorpommern-Greifswald,false,false
+SBK,Salzlandkreis,false,false
+SC,"Schwabach, Stadt",false,false
+SCZ,Saale-Orla-Kreis,false,false
+SDH,Kyffhäuserkreis,false,false
+SDL,Stendal,false,false
+SDT,Uckermark,false,false
+SE,Segeberg,false,false
+SEB,Sächsische Schweiz-Osterzgebirge,false,false
+SEE,Märkisch-Oderland,false,false
+SEF,Neustadt a. d. Aisch-Bad Windsheim,false,false
+SEL,Wunsiedel i. Fichtelgebirge,false,false
+SFB,Oberspreewald-Lausitz,false,false
+SFT,Salzlandkreis,false,false
+SG,"Solingen, Stadt",false,false
+SGH,Mansfeld-Südharz,false,false
+SHA,Schwäbisch Hall,false,false
+SHG,Schaumburg,false,false
+SHK,Saale-Holzland-Kreis,false,false
+SHL,"Suhl, Stadt",false,false
+SI,Siegen-Wittgenstein,false,false
+SIG,Sigmaringen,false,false
+SIM,Rhein-Hunsrück-Kreis,false,false
+SK,Saalekreis,false,false
+SL,Schleswig-Flensburg,false,false
+SLE,"Düren, Euskirchen",false,false
+SLF,Saalfeld-Rudolstadt,false,false
+SLG,"Ravensburg, Sigmaringen",false,false
+SLK,Salzlandkreis,false,false
+SLN,Altenburger Land,false,false
+SLS,Saarlouis,false,false
+SLZ,Wartburgkreis,false,false
+SLÜ,Main-Kinzig-Kreis,false,false
+SM,Schmalkalden-Meiningen,false,false
+SMÜ,Augsburg,false,false
+SN,"Schwerin, Stadt",false,false
+SO,Soest,false,false
+SOB,Neuburg-Schrobenhausen,false,false
+SOG,Weilheim-Schongau,false,false
+SOK,Saale-Orla-Kreis,false,false
+SON,Sonneberg,false,false
+SP,"Speyer, Stadt",false,false
+SPB,Spree-Neiße,false,false
+SPN,Spree-Neiße,false,false
+SR,"Straubing, Straubing-Bogen",false,false
+SRB,Märkisch-Oderland,false,false
+SRO,Saale-Holzland-Kreis,false,false
+ST,Steinfurt,false,false
+STA,Starnberg,false,false
+STB,Ludwigslust-Parchim,false,false
+STD,Stade,false,false
+STE,Lichtenfels,false,false
+STL,Erzgebirgskreis,false,false
+STO,"Konstanz, Sigmaringen",false,false
+SU,Rhein-Sieg-Kreis,false,false
+SUL,Amberg-Sulzbach,false,false
+SW,Schweinfurt,false,false
+SWA,Rheingau-Taunus-Kreis,false,false
+SY,Diepholz,false,false
+SZ,"Salzgitter, Stadt",false,false
+SZB,Erzgebirgskreis,false,false
+SÄK,Waldshut,false,false
+SÖM,Sömmerda,false,false
+SÜW,Südliche Weinstraße,false,false
+TBB,Main-Tauber-Kreis,false,false
+TDO,Nordsachsen,false,false
+TE,Steinfurt,false,false
+TET,"Rostock, Landkreis",false,false
+TF,Teltow-Fläming,false,false
+TG,Nordsachsen,false,false
+TIR,Tirschenreuth,false,false
+TO,Nordsachsen,false,false
+TP,Uckermark,false,false
+TR,"Trier, Stadt und Trier-Saarburg",false,false
+TS,Traunstein,false,false
+TT,Bodenseekreis,false,false
+TUT,Tuttlingen,false,false
+TÖL,Bad Tölz-Wolfratshausen,false,false
+TÜ,Tübingen,false,false
+UE,Uelzen,false,false
+UEM,Vorpommern-Greifswald,false,false
+UER,Vorpommern-Greifswald,false,false
+UFF,Neustadt a. d. Aisch-Bad Windsheim,false,false
+UH,Unstrut-Hainich-Kreis,false,false
+UL,"Ulm, Stadt, Alb-Donaukreis",false,false
+UM,Uckermark,false,false
+UN,Unna,false,false
+USI,Hochtaunuskreis,false,false
+V,Vogtlandkreis,false,false
+VAI,Ludwigsburg,false,false
+VB,Vogelsbergkreis,false,false
+VEC,Vechta,false,false
+VER,Verden,false,false
+VG,Vorpommern-Greifswald,false,false
+VIB,"Landshut, Rottal-Inn",false,false
+VIE,Viersen,false,false
+VIT,Regen,false,false
+VK,"Völklingen, Stadt",false,false
+VOH,Neustadt a. d. Waldnaab,false,false
+VR,Vorpommern-Rügen,false,false
+VS,Schwarzwald-Baar-Kreis,false,false
+W,"Wuppertal, Stadt",false,false
+WA,Waldeck-Frankenberg,false,false
+WAF,Warendorf,false,false
+WAK,Wartburgkreis,false,false
+WAN,"Herne, Stadt",false,false
+WAR,Höxter,false,false
+WAT,"Bochum, Stadt",false,false
+WB,Wittenberg,false,false
+WBG,"Wolfsburg, Stadt",false,false
+WBS,Eichsfeld,false,false
+WDA,Zwickau,false,false
+WE,"Weimar, Stadt",false,false
+WEL,Limburg-Weilburg,false,false
+WEN,"Weiden in der Oberpfalz, Stadt",false,false
+WER,"Augsburg, Dillingen a. d. Donau",false,false
+WES,Wesel,false,false
+WF,Wolfenbüttel,false,false
+WG,Ravensburg,false,false
+WHV,"Wilhelmshaven, Stadt",false,false
+WI,"Wiesbaden, Stadt",false,false
+WIL,Bernkastel-Wittlich,false,false
+WIS,Nordwestmecklenburg,false,false
+WIT,Ennepe-Ruhr-Kreis,false,false
+WIZ,Werra-Meißner-Kreis,false,false
+WK,Ostprignitz-Ruppin,false,false
+WL,Harburg,false,false
+WLG,Vorpommern-Greifswald,false,false
+WM,Weilheim-Schongau,false,false
+WMS,Börde,false,false
+WN,Rems-Murr-Kreis,false,false
+WND,St. Wendel,false,false
+WO,"Worms, Stadt",false,false
+WOB,"Wolfsburg, Stadt",false,false
+WOH,Kassel,false,false
+WOL,"Freudenstadt, Ortenaukreis",false,false
+WOR,"Bad Tölz-Wolfratshausen, München, Starnberg",false,false
+WOS,Freyung-Grafenau,false,false
+WR,Harz,false,false
+WRN,Mecklenburgische Seenplatte,false,false
+WS,"Mühldorf am Inn, Rosenheim",false,false
+WSF,Burgenlandkreis,false,false
+WST,Ammerland,false,false
+WSW,Görlitz,false,false
+WT,Waldshut,false,false
+WTL,Osnabrück,false,false
+WTM,Wittmund,false,false
+WUG,Weißenburg-Gunzenhausen,false,false
+WUN,Wunsiedel im Fichtelgebirge,false,false
+WUR,Leipzig,false,false
+WW,Westerwald,false,false
+WZ,Lahn-Dill-Kreis,false,false
+WZL,Börde,false,false
+WÜ,Würzburg,false,false
+WÜM,Cham,false,false
+Z,Zwickau,false,false
+ZE,Anhalt-Bitterfeld,false,false
+ZEL,Cochem-Zell,false,false
+ZI,Görlitz,false,false
+ZIG,Schwalm-Eder-Kreis,false,false
+ZP,Erzgebirgskreis,false,false
+ZR,Greiz,false,false
+ZS,Teltow-Fläming,false,false
+ZW,"Südwestpfalz, Zweibrücken, Stadt",false,false
+ZZ,Burgenlandkreis,false,false
+ÖHR,Hohenlohekreis,false,false
+ÜB,"Ravensburg, Bodenseekreis, Sigmaringen",false,false
+AL,Altena,true,false
+ALS,Vogelsbergkreis in Alsfeld Oberhessen,true,false
+AR,Arnsberg,true,false
+ASD,Aschendorf-Hümmling,true,false
+BEI,Beilngries,true,false
+BEL,Belzig,true,false
+BR,Bruchsal,true,false
+BRI,Brilon,true,false
+BU,Burgdorf,true,false
+BZA,Bergzabern,true,false
+DT,Lippe in Detmold,true,false
+EHI,Ehingen Donau,true,false
+EIH,Eichstätt,true,false
+ESA,Eisenach,true,false
+EUT,Eutin,true,false
+FAL,Fallingbostel,true,false
+FH,Main-Taunus-Kreis in Frankfurt Main-Höchst,true,false
+GEM,Gemünden am Main,true,false
+GRS,Gransee,true,false
+HUS,Husum,true,false
+HW,Halle,true,false
+HZ,Herzberg,true,false
+HÜN,,true,false
+IS,Iserlohn,true,false
+JEV,Friesland in Jever,true,false
+KAR,Main-Spessart in Karlstadt,true,false
+L,Lahn-Dill-Kreis in Wetzlar,true,false
+LAT,Vogelsbergkreis in Lauterbach Hessen,true,false
+LE,Lemgo,true,false
+LIN,Lingen in Lingen (Ems),true,false
+LK,Lübbecke,true,false
+LOH,Lohr am Main,true,false
+LS  ,Märkischer Kreis in Lüdenscheid,true,false
+LÜD,Lüdenscheid,true,false
+MAR,Marktheidenfeld,true,false
+MEP,Meppen,true,false
+MES,Hochsauerlandkreis in Meschede,true,false
+MT,Montabaur,true,false
+MÜN,Münsingen Württemberg,true,false
+NIB,Südtondern in Niebüll Schleswig,true,false
+NRÜ,Neustadt am Rübenberge,true,false
+OLD,Oldenburg/Holstein,true,false
+OR,Oranienburg,true,false
+OTT,Land Hadeln in Otterndorf,true,false
+PER,Perleberg,true,false
+PK,Pritzwalk,true,false
+RY,Rheydt,true,false
+SF,Oberallgäu,true,false
+SFA,Soltau-Fallingbostel,true,false
+SNH,Sinsheim Elsenz,true,false
+SOL,Soltau,true,false
+SPR,Springe,true,false
+STH,Schaumburg-Lippe in Stadthagen,true,false
+TÖN,Eiderstedt in Tönning Nordseebad,true,false
+VL,Villingen Schwarzwald,true,false
+VOF,Vilshofen,true,false
+WD,Wiedenbrück,true,false
+WEB,Oberwesterwaldkreis in Westerburg Westerwald,true,false
+WEG,Wegscheid,true,false
+WEM,Wesermünde in Bremerhaven,true,false
+BD,"Dienstfahrzeuge des Bundestages, des Bundesrates, des Bundespräsidialamtes, der Bundesregierung, der Bundesministerien, der Bundesfinanzverwaltung, des Bundesverfassungsgerichts und des Bundeskriminalamtes",false,true
+BG,Dienstfahrzeuge der Bundespolizei,false,true
+BP,Dienstfahrzeuge der Bundespolizei,false,true
+BW,Bundes-Wasserstraßen- und Schifffahrtsverwaltung,false,true
+THW,Dienstfahrzeuge der Bundesanstalt Technisches Hilfswerk,false,true
+Y,Dienstfahrzeuge der Bundeswehr,false,true
+X,"Dienstfahrzeuge der auf Grund des Nordatlantikvertrages errichteten internationalen militärischen Hauptquartiere, die ihren regelmäßigen Standort in der Bundesrepublik Deutschland haben",false,true
+B,Berlin Senat und Abgeordnetenhaus,false,true
+BBL,"Brandenburg Landesregierung, Landtag und Polizei",false,true
+BWL,"Baden-Württemberg Landesregierung, Landtag und Polizei",false,true
+BYL,Bayern Landesregierung und Landtag,false,true
+HB,Freie Hansestadt Bremen Senat und Bürgerschaft,false,true
+HEL,Hessen Landesregierung und Landtag,false,true
+HH,Freie und Hansestadt Hamburg Senat und Bürgerschaft,false,true
+LSA,"Sachsen-Anhalt Landesregierung, Landtag und Polizei",false,true
+LSN,Sachsen Landesregierung und Landtag,false,true
+MVL,Mecklenburg-Vorpommern Landesregierung (einschließlich Landespolizei) und Landtag,false,true
+NL,Niedersachsen Landesregierung und Landtag,false,true
+NRW,"Nordrhein-Westfalen Landesregierung, Landtag und Polizei",false,true
+RPL,"Rheinland-Pfalz Landesregierung, Landtag und Polizei",false,true
+SAL,"Saarland Landesregierung, Landtag und Polizei",false,true
+SH,"Schleswig-Holstein Landesregierung, Landtag und Polizei",false,true
+THL,Thüringen Landesregierung und Landtag,false,true
+0,Diplomatische Vertretungen oder internationale Organisationen und in Abhängigkeit vom Status der bevorrechtigten Person,false,true
+B,Diplomatische Vertretungen oder internationale Organisationen und in Abhängigkeit vom Status der bevorrechtigten Person,false,true
+BN,Diplomatische Vertretungen oder internationale Organisationen und in Abhängigkeit vom Status der bevorrechtigten Person,false,true
