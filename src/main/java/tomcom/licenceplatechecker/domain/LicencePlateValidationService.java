@@ -159,7 +159,7 @@ public class LicencePlateValidationService {
         if (ForbiddenCombinations.isForbiddenIdentifier(identifier))
             throw new InvalidLicencePlateException(String.format("Illegal identifier '%s' for distinguisher '%s'", identifier, distinguisherCode));
         if (ForbiddenCombinations.isForbiddenPair(combinationKey))
-            throw new IllegalArgumentException(String.format("Illegal combination %s'", combinationKey));
+            throw new InvalidLicencePlateException(String.format("Illegal combination %s'", combinationKey));
         return licencePlate;
     }
 

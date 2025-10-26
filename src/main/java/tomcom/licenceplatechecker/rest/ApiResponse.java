@@ -22,4 +22,16 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> error(String errorMessage) {
         return new ApiResponse<>(false, null, errorMessage);
     }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public String getError() {
+        return error;
+    }
 }
