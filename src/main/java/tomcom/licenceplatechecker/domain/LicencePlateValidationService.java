@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import tomcom.licenceplatechecker.domain.exception.AmbiguousLicencePlateException;
 import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
 import tomcom.licenceplatechecker.domain.validator.CivilianPlateValidator;
+import tomcom.licenceplatechecker.domain.validator.ForbiddenCombinations;
 import tomcom.licenceplatechecker.domain.validator.SpecialPlateValidator;
 
 import java.util.ArrayList;
@@ -35,15 +36,10 @@ public class LicencePlateValidationService {
     public LicencePlate validateLicencePlate(String input) {
         validateInput(input);
         String normalizedInput = normalizeCase(input);
-
-        if (containsSeparators(normalizedInput)) {
-            Optional<LicencePlate> result = tryParseWithExplicitSeparator(normalizedInput);
-            if (result.isPresent()) {
-                return result.get();
-            }
-        }
-
-        return parseAmbiguous(normalizedInput);
+        Region region = null;
+        if (containsSeparators(normalizedInput))
+            region = getRegion(normalizedInput);
+        return validateAndParseLicencePlate(normalizedInput, region);
     }
 
     /**
@@ -88,55 +84,42 @@ public class LicencePlateValidationService {
      * Try to parse the input using explicit separators to identify the region boundary.
      * This method provides unambiguous parsing when separators are present.
      */
-    private Optional<LicencePlate> tryParseWithExplicitSeparator(String input) {
-        // Find first separator to split region from the rest
+    private Region getRegion(String input) {
         int separatorIndex = findFirstSeparatorIndex(input);
-        if (separatorIndex <= 0) {
-            return Optional.empty();
-        }
 
         String regionCode = input.substring(0, separatorIndex).trim();
-        if (!regionCode.matches(REGION_CODE_REGEX)) {
-            return Optional.empty();
-        }
+        if (!regionCode.matches(REGION_CODE_REGEX))
+            throw new InvalidLicencePlateException(String.format("Region code '%s' does not match pattern", regionCode));
 
         Optional<Region> regionOpt = regionRepository.findByCode(regionCode);
-        if (regionOpt.isEmpty()) {
-            return Optional.empty();
-        }
+        if (regionOpt.isEmpty())
+            throw new InvalidLicencePlateException(String.format("No region found for code %s", regionCode));
 
-        Region region = regionOpt.get();
-        String remainingPart = extractRemainingPart(input, separatorIndex);
-
-        return parseRemainingPart(region, remainingPart);
+        return regionOpt.get();
     }
 
     /**
      * Parse licence plate when no separators are present or separator-based parsing failed.
      * This method may result in ambiguous results when multiple valid interpretations exist.
      */
-    private LicencePlate parseAmbiguous(String input) {
+    private LicencePlate validateAndParseLicencePlate(String input, Region region) {
         String normalized = removeSeparators(input);
-
-        if (!normalized.matches(ALPHANUMERIC_ONLY_REGEX)) {
+        if (!normalized.matches(ALPHANUMERIC_ONLY_REGEX))
             throw new InvalidLicencePlateException("Nur Buchstaben A-Z und Ziffern 0-9 erlaubt");
-        }
-
-        ModifierExtractionResult modifierResult = extractTrailingModifier(normalized);
-        String workingString = modifierResult.remainingString();
-
-        List<Region> regionCandidates = findRegionCandidates(workingString);
-
-        if (regionCandidates.isEmpty()) {
-            throw new InvalidLicencePlateException("Unbekanntes Regional-Kürzel");
-        }
 
         List<LicencePlate> validParsings = new ArrayList<>();
+        if (region == null) {
+            List<Region> regionCandidates = findRegionCandidates(input);
+            if (regionCandidates.isEmpty())
+                throw new InvalidLicencePlateException("Unbekanntes Regional-Kürzel");
 
-        for (Region region : regionCandidates) {
-            String remainingPart = workingString.substring(region.code.length());
-            parseRemainingPart(region, remainingPart + modifierResult.modifier())
-                .ifPresent(validParsings::add);
+            for (Region regionCandidate : regionCandidates) {
+                String remaining = input.substring(regionCandidate.code.length());
+                parseRemainingPart(regionCandidate, remaining).ifPresent(validParsings::add);
+            }
+        } else {
+            String remaining = input.substring(region.code.length());
+            parseRemainingPart(region, remaining).ifPresent(validParsings::add);
         }
 
         return selectUniqueParsing(validParsings);
@@ -152,10 +135,8 @@ public class LicencePlateValidationService {
         String modifier = modifierResult.modifier();
         String cleanedString = removeSeparators(workingString);
 
-        if (Boolean.TRUE.equals(region.special)) {
+        if (Boolean.TRUE.equals(region.special))
             return specialPlateValidator.validate(region, cleanedString, modifier);
-        }
-
         return civilianPlateValidator.validate(region, cleanedString, modifier);
     }
 
@@ -205,7 +186,18 @@ public class LicencePlateValidationService {
             throw new AmbiguousLicencePlateException("Kennzeichen mehrdeutig");
         }
 
-        return parsings.get(0);
+        LicencePlate licencePlate = parsings.get(0);
+
+        String regionCode = licencePlate.getRegion().code;
+        String identifier = licencePlate.getIdentifier();
+        String combinationKey = regionCode + "-" + identifier;
+        if (ForbiddenCombinations.isForbiddenIdentifier(identifier)) {
+            throw new InvalidLicencePlateException(String.format("Illegal identifier '%s' for region '%s'", identifier, regionCode));
+        }
+        if (ForbiddenCombinations.isForbiddenPair(combinationKey)) {
+            throw new IllegalArgumentException(String.format("Illegal combination %s'", combinationKey));
+        }
+        return licencePlate;
     }
 
     /**
@@ -243,5 +235,5 @@ public class LicencePlateValidationService {
     }
 
     // Helper record for cleaner return values
-    private record ModifierExtractionResult(String remainingString, String modifier) {}
+    private record ModifierExtractionResult(String remainingString, String modifier) { }
 }

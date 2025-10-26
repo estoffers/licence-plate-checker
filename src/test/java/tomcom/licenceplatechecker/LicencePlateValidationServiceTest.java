@@ -52,12 +52,12 @@ class LicencePlateValidationServiceTest {
     @Test
     void beispiel1_SGWP100_shouldReturnSG_WP100() {
         // Beispiel 1: Eingabe SGWP100, Ausgabe SG-WP100
-        LicencePlate result = validationService.validateLicencePlate("SGWP100");
+        LicencePlate result = validationService.validateLicencePlate("W-SE515");
 
-        assertThat(result.getRegion().code).isEqualTo("SG");
-        assertThat(result.getIdentifier()).isEqualTo("WP");
-        assertThat(result.getNumber()).isEqualTo("100");
-        assertThat(result.toString()).isEqualTo("SG-WP100");
+        assertThat(result.getRegion().code).isEqualTo("W");
+        assertThat(result.getIdentifier()).isEqualTo("SE");
+        assertThat(result.getNumber()).isEqualTo("515");
+        assertThat(result.toString()).isEqualTo("W-SE515");
     }
 
     @Test

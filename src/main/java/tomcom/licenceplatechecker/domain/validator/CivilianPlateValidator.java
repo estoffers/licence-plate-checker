@@ -2,6 +2,7 @@ package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
 import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -27,14 +28,6 @@ public class CivilianPlateValidator {
     private static final String DIGITS_ONLY_REGEX = "[0-9]+";
     
     private static final Set<Character> FORBIDDEN_UMLAUT_CHARS = Set.of('Ä', 'Ö', 'Ü');
-    
-    private static final Set<String> FORBIDDEN_PAIRS = Set.of(
-        "D-IS", "SU-IS", "MR-IS", "DA-IS", 
-        "S-A", "S-S", "S-D", "K-Z", "S-ED", 
-        "N-PD", "N-SU", "N-S", 
-        "WAF-FE", "SK-IN", "IZ-AN", "HEI-L", 
-        "SU-FF", "R-NS", "BUL-LE", "MO-RD"
-    );
 
     private final RedPlateValidator dealerPlateValidator;
 
@@ -83,7 +76,7 @@ public class CivilianPlateValidator {
     }
 
     private Optional<LicencePlate> validateStandardPlate(Region region, String identifier, String number, String modifier) {
-        if (identifier.length() > MAX_IDENTIFIER_LENGTH || ForbiddenCombinations.isForbiddenIdentifier(identifier)) {
+        if (identifier.length() > MAX_IDENTIFIER_LENGTH) {
             return Optional.empty();
         }
 
@@ -93,11 +86,6 @@ public class CivilianPlateValidator {
 
         int totalLength = region.code.length() + identifier.length() + number.length() + modifier.length();
         if (totalLength > MAX_TOTAL_LENGTH) {
-            return Optional.empty();
-        }
-
-        String combinationKey = region.code + "-" + identifier;
-        if (ForbiddenCombinations.isForbiddenPair(combinationKey)) {
             return Optional.empty();
         }
 

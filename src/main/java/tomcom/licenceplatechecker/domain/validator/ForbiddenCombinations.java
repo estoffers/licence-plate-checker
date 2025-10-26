@@ -2,7 +2,7 @@ package tomcom.licenceplatechecker.domain.validator;
 
 import java.util.Set;
 
-final class ForbiddenCombinations {
+public final class ForbiddenCombinations {
     private ForbiddenCombinations() {}
 
     static final Set<String> FORBIDDEN_IDENTIFIERS = Set.of("HJ", "KZ", "NS", "SA", "SS");
@@ -14,12 +14,12 @@ final class ForbiddenCombinations {
         "SU-FF", "R-NS", "BUL-LE", "MO-RD"
     );
 
-    static boolean isForbiddenIdentifier(String identifier) {
+    public static boolean isForbiddenIdentifier(String identifier) {
         if (identifier == null) return false;
         return FORBIDDEN_IDENTIFIERS.contains(identifier);
     }
 
-    static boolean isForbiddenPair(String pair) {
+    public static boolean isForbiddenPair(String pair) {
         if (pair == null) return false;
         return FORBIDDEN_PAIRS.contains(pair);
     }
