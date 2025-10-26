@@ -2,24 +2,24 @@ package tomcom.licenceplatechecker.domain;
 
 public class LicencePlate {
 
-    private final Region region;
+    private final Distinguisher distinguisher;
     private final String identifier;
     private final String number;
     private final String modifier; // optional: "H" or "E"
 
-    private LicencePlate(Region region, String identifier, String number, String modifier) {
-        this.region = region;
+    private LicencePlate(Distinguisher distinguisher, String identifier, String number, String modifier) {
+        this.distinguisher = distinguisher;
         this.identifier = identifier == null ? "" : identifier;
         this.number = number == null ? "" : number;
         this.modifier = modifier == null ? "" : modifier;
     }
 
-    public static LicencePlate of(Region region, String identifier, String number, String modifier) {
-        return new LicencePlate(region, identifier, number, modifier);
+    public static LicencePlate of(Distinguisher distinguisher, String identifier, String number, String modifier) {
+        return new LicencePlate(distinguisher, identifier, number, modifier);
     }
 
-    public Region getRegion() {
-        return region;
+    public Distinguisher getDistinguisher() {
+        return distinguisher;
     }
 
     public String getIdentifier() {
@@ -36,10 +36,10 @@ public class LicencePlate {
 
     @Override
     public String toString() {
-        if (region.special != null && region.special) {
+        if (distinguisher.special != null && distinguisher.special) {
             // Special plates (e.g., Y, THW) usually have no hyphen and no identifier
-            return region.code + number;
+            return distinguisher.code + number;
         }
-        return region.code + "-" + identifier + number + modifier;
+        return distinguisher.code + "-" + identifier + number + modifier;
     }
 }

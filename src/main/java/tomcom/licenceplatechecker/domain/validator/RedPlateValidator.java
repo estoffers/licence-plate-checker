@@ -1,7 +1,7 @@
 package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 
 import java.util.Optional;
 import java.util.Set;
@@ -31,17 +31,17 @@ public class RedPlateValidator {
     private static final int MAX_TOTAL_LENGTH = 8;
     private static final String DIGITS_ONLY_REGEX = "[0-9]{1," + MAX_NUMBER_LENGTH + "}";
 
-    public Optional<LicencePlate> validate(Region region, String number, String modifier) {
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String number, String modifier) {
         if (!modifier.isEmpty())
             return Optional.empty();
 
         if (!isRedPlateNumber(number))
             return Optional.empty();
 
-        if (!isWithinMaxLength(region, number))
+        if (!isWithinMaxLength(distinguisher, number))
             return Optional.empty();
 
-        return Optional.of(LicencePlate.of(region, "", number, ""));
+        return Optional.of(LicencePlate.of(distinguisher, "", number, ""));
     }
 
     private boolean isRedPlateNumber(String number) {
@@ -53,8 +53,8 @@ public class RedPlateValidator {
             .anyMatch(number::startsWith);
     }
 
-    private boolean isWithinMaxLength(Region region, String number) {
-        int totalLength = region.code.length() + number.length();
+    private boolean isWithinMaxLength(Distinguisher distinguisher, String number) {
+        int totalLength = distinguisher.code.length() + number.length();
         return totalLength <= MAX_TOTAL_LENGTH;
     }
 }

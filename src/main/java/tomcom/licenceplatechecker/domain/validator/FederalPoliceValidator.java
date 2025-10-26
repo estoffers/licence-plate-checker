@@ -1,7 +1,7 @@
 package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 
 import java.util.Optional;
 import java.util.Set;
@@ -65,12 +65,12 @@ public class FederalPoliceValidator {
     /**
      * Validates and parses a Federal Police licence plate.
      *
-     * @param region the region (should be "BP")
-     * @param remainingPart the numeric part after the region code
+     * @param distinguisher the distinguisher (should be "BP")
+     * @param remainingPart the numeric part after the distinguisher code
      * @param modifier the modifier (only "E" allowed for electric vehicles 60-61)
      * @return Optional containing the LicencePlate if valid, empty otherwise
      */
-    public Optional<LicencePlate> validate(Region region, String remainingPart, String modifier) {
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
         // Must be only digits
         if (!remainingPart.matches("[0-9]+")) {
             return Optional.empty();
@@ -82,7 +82,7 @@ public class FederalPoliceValidator {
             if (!modifier.isEmpty()) {
                 return Optional.empty();
             }
-            return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+            return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
         }
 
         // Regular BP plates: must be 3-5 digits (2 digits vehicle type + 1-3 digits sequential)
@@ -121,7 +121,7 @@ public class FederalPoliceValidator {
             }
         }
 
-        return Optional.of(LicencePlate.of(region, "", remainingPart, modifier));
+        return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, modifier));
     }
 
     /**

@@ -1,7 +1,7 @@
 package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 
 import java.util.Optional;
 
@@ -30,7 +30,7 @@ public class NatoValidator {
     private static final int MAX_NUMBER_LENGTH = 6;
     private static final String VALID_NUMBER_REGEX = "[0-9]{" + MIN_NUMBER_LENGTH + "," + MAX_NUMBER_LENGTH + "}";
 
-    public Optional<LicencePlate> validate(Region region, String remainingPart, String modifier) {
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
         if (!modifier.isEmpty()) {
             return Optional.empty();
         }
@@ -39,6 +39,6 @@ public class NatoValidator {
             return Optional.empty();
         }
 
-        return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+        return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
     }
 }

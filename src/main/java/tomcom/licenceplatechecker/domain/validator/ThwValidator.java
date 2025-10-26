@@ -1,7 +1,7 @@
 package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 
 import java.util.Optional;
 
@@ -38,7 +38,7 @@ public class ThwValidator {
 
     private static final int RED_PLATE_MIN = 600;
     private static final int RED_PLATE_MAX = 699;
-    public Optional<LicencePlate> validate(Region region, String remainingPart, String modifier) {
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
         // THW plates do not allow modifiers
         if (!modifier.isEmpty()) {
             return Optional.empty();
@@ -51,7 +51,7 @@ public class ThwValidator {
 
         // Check if it's a red dealer plate (THW-0600 to THW-0699)
         if (isRedPlate(remainingPart)) {
-            return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+            return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
         }
 
         // Regular THW plates: must be 4 or 5 digits
@@ -72,12 +72,12 @@ public class ThwValidator {
         if (length == 4) {
             // 4-digit: 8000-8999 or 9000-9999
             if ((number >= 8000 && number <= 8999) || (number >= 9000 && number <= 9999)) {
-                return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+                return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
             }
         } else { // length == 5
             // 5-digit: 80000-89999 or 90000-99999
             if ((number >= 80000 && number <= 89999) || (number >= 90000 && number <= 99999)) {
-                return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+                return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
             }
         }
 

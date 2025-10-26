@@ -18,17 +18,17 @@ public class LicencePlateValidationService {
 
     private static final String ALLOWED_CHARACTERS_REGEX = "[A-Z0-9\\- ]+";
     private static final String ALPHANUMERIC_ONLY_REGEX = "[A-Z0-9]+";
-    private static final String REGION_CODE_REGEX = "[A-Z]{1,3}";
+    private static final String DISTINGUISHER_CODE_REGEX = "[A-Z]{1,3}";
 
-    private static final int MAX_REGION_CODE_LENGTH = 3;
+    private static final int MAX_DISTINGUISHER_CODE_LENGTH = 3;
     private static final Set<Character> VALID_MODIFIERS = Set.of('H', 'E');
 
-    private final RegionRepository regionRepository;
+    private final DistinguisherRepository distinguisherRepository;
     private final SpecialPlateValidator specialPlateValidator;
     private final CivilianPlateValidator civilianPlateValidator;
 
-    public LicencePlateValidationService(RegionRepository regionRepository) {
-        this.regionRepository = regionRepository;
+    public LicencePlateValidationService(DistinguisherRepository distinguisherRepository) {
+        this.distinguisherRepository = distinguisherRepository;
         this.specialPlateValidator = new SpecialPlateValidator();
         this.civilianPlateValidator = new CivilianPlateValidator();
     }
@@ -36,24 +36,18 @@ public class LicencePlateValidationService {
     public LicencePlate validateLicencePlate(String input) {
         validateInput(input);
         String normalizedInput = normalizeCase(input);
-        Region region = null;
+        Distinguisher distinguisher = null;
         if (containsSeparators(normalizedInput))
-            region = getRegion(normalizedInput);
-        return validateAndParseLicencePlate(normalizedInput, region);
+            distinguisher = getDistinguisher(normalizedInput);
+        return validateAndParseLicencePlate(normalizedInput, distinguisher);
     }
 
-    /**
-     * Validate basic input constraints.
-     */
     private void validateInput(String input) {
         if (input == null || input.isBlank()) {
             throw new InvalidLicencePlateException("Kennzeichen darf nicht leer sein");
         }
     }
 
-    /**
-     * Normalize input to uppercase for consistent processing.
-     */
     private String normalizeCase(String input) {
         String normalized = input.toUpperCase(Locale.ROOT).trim();
 
@@ -66,83 +60,62 @@ public class LicencePlateValidationService {
         return normalized;
     }
 
-    /**
-     * Check if the input contains separator characters (space or hyphen).
-     */
     private boolean containsSeparators(String input) {
         return input.contains("-") || input.contains(" ");
     }
 
-    /**
-     * Remove all separator characters from the input.
-     */
     private String removeSeparators(String input) {
         return input.replace("-", "").replace(" ", "");
     }
 
-    /**
-     * Try to parse the input using explicit separators to identify the region boundary.
-     * This method provides unambiguous parsing when separators are present.
-     */
-    private Region getRegion(String input) {
+    private Distinguisher getDistinguisher(String input) {
         int separatorIndex = findFirstSeparatorIndex(input);
 
-        String regionCode = input.substring(0, separatorIndex).trim();
-        if (!regionCode.matches(REGION_CODE_REGEX))
-            throw new InvalidLicencePlateException(String.format("Region code '%s' does not match pattern", regionCode));
+        String distinguisherCode = input.substring(0, separatorIndex).trim();
+        if (!distinguisherCode.matches(DISTINGUISHER_CODE_REGEX))
+            throw new InvalidLicencePlateException(String.format("Distinguisher code '%s' does not match pattern", distinguisherCode));
 
-        Optional<Region> regionOpt = regionRepository.findByCode(regionCode);
-        if (regionOpt.isEmpty())
-            throw new InvalidLicencePlateException(String.format("No region found for code %s", regionCode));
+        Optional<Distinguisher> distinguisherOpt = distinguisherRepository.findByCode(distinguisherCode);
+        if (distinguisherOpt.isEmpty())
+            throw new InvalidLicencePlateException(String.format("No distinguisher found for code %s", distinguisherCode));
 
-        return regionOpt.get();
+        return distinguisherOpt.get();
     }
 
-    /**
-     * Parse licence plate when no separators are present or separator-based parsing failed.
-     * This method may result in ambiguous results when multiple valid interpretations exist.
-     */
-    private LicencePlate validateAndParseLicencePlate(String input, Region region) {
+    private LicencePlate validateAndParseLicencePlate(String input, Distinguisher distinguisher) {
         String normalized = removeSeparators(input);
         if (!normalized.matches(ALPHANUMERIC_ONLY_REGEX))
             throw new InvalidLicencePlateException("Nur Buchstaben A-Z und Ziffern 0-9 erlaubt");
 
         List<LicencePlate> validParsings = new ArrayList<>();
-        if (region == null) {
-            List<Region> regionCandidates = findRegionCandidates(input);
-            if (regionCandidates.isEmpty())
-                throw new InvalidLicencePlateException("Unbekanntes Regional-Kürzel");
+        if (distinguisher == null) {
+            List<Distinguisher> distinguisherCandidates = findDistinguisherCandidates(input);
+            if (distinguisherCandidates.isEmpty())
+                throw new InvalidLicencePlateException("Unbekanntes Distinguisheral-Kürzel");
 
-            for (Region regionCandidate : regionCandidates) {
-                String remaining = input.substring(regionCandidate.code.length());
-                parseRemainingPart(regionCandidate, remaining).ifPresent(validParsings::add);
+            for (Distinguisher distinguisherCandidate : distinguisherCandidates) {
+                String remaining = input.substring(distinguisherCandidate.code.length());
+                parseRemainingPart(distinguisherCandidate, remaining).ifPresent(validParsings::add);
             }
         } else {
-            String remaining = input.substring(region.code.length());
-            parseRemainingPart(region, remaining).ifPresent(validParsings::add);
+            String remaining = input.substring(distinguisher.code.length());
+            parseRemainingPart(distinguisher, remaining).ifPresent(validParsings::add);
         }
 
         return selectUniqueParsing(validParsings);
     }
 
-    /**
-     * Parse the remaining part of a licence plate after the region code.
-     * Delegate to appropriate validator based on region type (special or civilian).
-     */
-    private Optional<LicencePlate> parseRemainingPart(Region region, String remainingPart) {
+    private Optional<LicencePlate> parseRemainingPart(Distinguisher distinguisher, String remainingPart) {
         ModifierExtractionResult modifierResult = extractTrailingModifier(remainingPart.trim());
         String workingString = modifierResult.remainingString();
         String modifier = modifierResult.modifier();
         String cleanedString = removeSeparators(workingString);
 
-        if (Boolean.TRUE.equals(region.special))
-            return specialPlateValidator.validate(region, cleanedString, modifier);
-        return civilianPlateValidator.validate(region, cleanedString, modifier);
+        if (Boolean.TRUE.equals(distinguisher.special))
+            return specialPlateValidator.validate(distinguisher, cleanedString, modifier);
+        return civilianPlateValidator.validate(distinguisher, cleanedString, modifier);
     }
 
-    /**
-     * Extract modifier from the end of a string
-     */
     private ModifierExtractionResult extractTrailingModifier(String input) {
         if (input.isEmpty()) {
             return new ModifierExtractionResult(input, "");
@@ -159,50 +132,37 @@ public class LicencePlateValidationService {
         return new ModifierExtractionResult(input, "");
     }
 
-    /**
-     * Find all valid region codes that could be the prefix of the input
-     */
-    private List<Region> findRegionCandidates(String input) {
-        List<Region> candidates = new ArrayList<>();
-        int maxLength = Math.min(MAX_REGION_CODE_LENGTH, input.length());
+    private List<Distinguisher> findDistinguisherCandidates(String input) {
+        List<Distinguisher> candidates = new ArrayList<>();
+        int maxLength = Math.min(MAX_DISTINGUISHER_CODE_LENGTH, input.length());
 
         for (int length = 1; length <= maxLength; length++) {
             String potentialCode = input.substring(0, length);
-            regionRepository.findByCode(potentialCode).ifPresent(candidates::add);
+            distinguisherRepository.findByCode(potentialCode).ifPresent(candidates::add);
         }
 
         return candidates;
     }
 
-    /**
-     * Select a unique parsing result or throws an exception if ambiguous or invalid.
-     */
     private LicencePlate selectUniqueParsing(List<LicencePlate> parsings) {
-        if (parsings.isEmpty()) {
+        if (parsings.isEmpty())
             throw new InvalidLicencePlateException("Ungültiges Kennzeichen");
-        }
-
-        if (parsings.size() > 1) {
+        if (parsings.size() > 1)
             throw new AmbiguousLicencePlateException("Kennzeichen mehrdeutig");
-        }
 
         LicencePlate licencePlate = parsings.get(0);
 
-        String regionCode = licencePlate.getRegion().code;
+        String distinguisherCode = licencePlate.getDistinguisher().code;
         String identifier = licencePlate.getIdentifier();
-        String combinationKey = regionCode + "-" + identifier;
-        if (ForbiddenCombinations.isForbiddenIdentifier(identifier)) {
-            throw new InvalidLicencePlateException(String.format("Illegal identifier '%s' for region '%s'", identifier, regionCode));
-        }
-        if (ForbiddenCombinations.isForbiddenPair(combinationKey)) {
+        String combinationKey = distinguisherCode + "-" + identifier;
+
+        if (ForbiddenCombinations.isForbiddenIdentifier(identifier))
+            throw new InvalidLicencePlateException(String.format("Illegal identifier '%s' for distinguisher '%s'", identifier, distinguisherCode));
+        if (ForbiddenCombinations.isForbiddenPair(combinationKey))
             throw new IllegalArgumentException(String.format("Illegal combination %s'", combinationKey));
-        }
         return licencePlate;
     }
 
-    /**
-     * Find the index of the first separator (space or hyphen) in the string
-     */
     private int findFirstSeparatorIndex(String input) {
         int hyphenIndex = input.indexOf('-');
         int spaceIndex = input.indexOf(' ');
@@ -213,27 +173,5 @@ public class LicencePlateValidationService {
         return Math.min(hyphenIndex, spaceIndex);
     }
 
-    /**
-     * Extract the remaining part after the region code, removing leading separators.
-     */
-    private String extractRemainingPart(String input, int separatorIndex) {
-        String remaining = input.substring(separatorIndex + 1).trim();
-
-        // Remove any leading separators
-        while (!remaining.isEmpty() && isSeparator(remaining.charAt(0))) {
-            remaining = remaining.substring(1).trim();
-        }
-
-        return remaining;
-    }
-
-    /**
-     * Checks if a character is a separator (space or hyphen).
-     */
-    private boolean isSeparator(char c) {
-        return c == '-' || c == ' ';
-    }
-
-    // Helper record for cleaner return values
     private record ModifierExtractionResult(String remainingString, String modifier) { }
 }

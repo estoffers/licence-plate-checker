@@ -11,12 +11,12 @@ import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
 class RestExceptionHandler {
 
     @ExceptionHandler(InvalidLicencePlateException.class)
-    public ResponseEntity<String> handleInvalid(InvalidLicencePlateException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    public ResponseEntity<ApiResponse<Void>> handleInvalid(InvalidLicencePlateException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(ex.getMessage()));
     }
 
     @ExceptionHandler(AmbiguousLicencePlateException.class)
-    public ResponseEntity<String> handleAmbiguous(AmbiguousLicencePlateException ex) {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ex.getMessage());
+    public ResponseEntity<ApiResponse<Void>> handleAmbiguous(AmbiguousLicencePlateException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ApiResponse.error(ex.getMessage()));
     }
 }

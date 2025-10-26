@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 import tomcom.licenceplatechecker.domain.validator.FederalPoliceValidator;
 
 import java.util.Optional;
@@ -19,22 +19,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FederalPoliceValidatorTest {
 
     private FederalPoliceValidator validator;
-    private Region testRegion;
+    private Distinguisher testDistinguisher;
 
     @BeforeEach
     void setUp() {
         validator = new FederalPoliceValidator();
-        testRegion = new Region();
-        testRegion.code = "BP";
-        testRegion.label = "Bundespolizei";
-        testRegion.special = true;
+        testDistinguisher = new Distinguisher();
+        testDistinguisher.code = "BP";
+        testDistinguisher.label = "Bundespolizei";
+        testDistinguisher.special = true;
     }
 
     // Motorcycles (10-12)
     @ParameterizedTest
     @ValueSource(strings = {"101", "1099", "119", "12999"})
     void validate_motorcycles_shouldReturnLicencePlate(String number) {
-        Optional<LicencePlate> result = validator.validate(testRegion, number, "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, number, "");
         
         assertThat(result).isPresent();
         assertThat(result.get().getNumber()).isEqualTo(number);
@@ -46,7 +46,7 @@ class FederalPoliceValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"151", "1599", "191", "19456"})
     void validate_passengerCars_shouldReturnLicencePlate(String number) {
-        Optional<LicencePlate> result = validator.validate(testRegion, number, "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, number, "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType(number))
@@ -56,7 +56,7 @@ class FederalPoliceValidatorTest {
     // Off-road Passenger Cars (20-24)
     @Test
     void validate_offroadPassengerCars_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "201", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "201", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("201"))
@@ -66,7 +66,7 @@ class FederalPoliceValidatorTest {
     // Light Trucks (25-29)
     @Test
     void validate_lightTrucks_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "251", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "251", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("251"))
@@ -76,7 +76,7 @@ class FederalPoliceValidatorTest {
     // Off-road Light (30-34)
     @Test
     void validate_offroadLight_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "301", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "301", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("301"))
@@ -86,7 +86,7 @@ class FederalPoliceValidatorTest {
     // Trucks up to 6t (35-39)
     @Test
     void validate_trucksUpTo6t_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "351", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "351", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("351"))
@@ -96,7 +96,7 @@ class FederalPoliceValidatorTest {
     // Off-road Trucks up to 6t (40-44)
     @Test
     void validate_offroadTrucksUpTo6t_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "401", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "401", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("401"))
@@ -106,7 +106,7 @@ class FederalPoliceValidatorTest {
     // Heavy Trucks and Buses (45-49)
     @Test
     void validate_heavyTrucksBuses_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "451", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "451", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("451"))
@@ -116,7 +116,7 @@ class FederalPoliceValidatorTest {
     // Armored Vehicles (50-54)
     @Test
     void validate_armoredVehicles_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "501", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "501", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("501"))
@@ -126,7 +126,7 @@ class FederalPoliceValidatorTest {
     // Trailers (55-59)
     @Test
     void validate_trailers_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "551", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "551", "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType("551"))
@@ -136,7 +136,7 @@ class FederalPoliceValidatorTest {
     // Electric Vehicles (60-61) - Must have E modifier
     @Test
     void validate_electricVehicles_withEModifier_shouldReturnLicencePlate() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "601", "E");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "601", "E");
         
         assertThat(result).isPresent();
         assertThat(result.get().getModifier()).isEqualTo("E");
@@ -147,7 +147,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_electricVehicles_withoutModifier_shouldReturnEmpty() {
         // Electric vehicles must have E modifier
-        Optional<LicencePlate> result = validator.validate(testRegion, "601", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "601", "");
         
         assertThat(result).isEmpty();
     }
@@ -155,7 +155,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_electricVehicles_withHModifier_shouldReturnEmpty() {
         // Electric vehicles can only have E modifier, not H
-        Optional<LicencePlate> result = validator.validate(testRegion, "601", "H");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "601", "H");
         
         assertThat(result).isEmpty();
     }
@@ -164,7 +164,7 @@ class FederalPoliceValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"0600", "0650", "0699"})
     void validate_redPlates_shouldReturnLicencePlate(String number) {
-        Optional<LicencePlate> result = validator.validate(testRegion, number, "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, number, "");
         
         assertThat(result).isPresent();
         assertThat(validator.getVehicleType(number))
@@ -174,7 +174,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_redPlate_withModifier_shouldReturnEmpty() {
         // Red plates do not allow modifiers
-        Optional<LicencePlate> result = validator.validate(testRegion, "0650", "E");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "0650", "E");
         
         assertThat(result).isEmpty();
     }
@@ -183,7 +183,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_invalidVehicleTypeCode_shouldReturnEmpty() {
         // 09 is not a valid vehicle type code
-        Optional<LicencePlate> result = validator.validate(testRegion, "091", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "091", "");
         
         assertThat(result).isEmpty();
     }
@@ -191,7 +191,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_tooShort_shouldReturnEmpty() {
         // Must be at least 3 digits (2 vehicle type + 1 sequential)
-        Optional<LicencePlate> result = validator.validate(testRegion, "15", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "15", "");
         
         assertThat(result).isEmpty();
     }
@@ -199,7 +199,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_sequentialTooLong_shouldReturnEmpty() {
         // Sequential number max 3 digits
-        Optional<LicencePlate> result = validator.validate(testRegion, "151234", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "151234", "");
         
         assertThat(result).isEmpty();
     }
@@ -207,14 +207,14 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_nonElectricWithEModifier_shouldReturnEmpty() {
         // Non-electric vehicles cannot have E modifier
-        Optional<LicencePlate> result = validator.validate(testRegion, "151", "E");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "151", "E");
         
         assertThat(result).isEmpty();
     }
 
     @Test
     void validate_withLetters_shouldReturnEmpty() {
-        Optional<LicencePlate> result = validator.validate(testRegion, "15AB1", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "15AB1", "");
         
         assertThat(result).isEmpty();
     }
@@ -222,7 +222,7 @@ class FederalPoliceValidatorTest {
     @Test
     void validate_invalidVehicleTypeRange_shouldReturnEmpty() {
         // 14 is between valid ranges (10-12 and 15-19)
-        Optional<LicencePlate> result = validator.validate(testRegion, "141", "");
+        Optional<LicencePlate> result = validator.validate(testDistinguisher, "141", "");
         
         assertThat(result).isEmpty();
     }

@@ -1,8 +1,7 @@
 package tomcom.licenceplatechecker.domain.validator;
 
+import tomcom.licenceplatechecker.domain.Distinguisher;
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
-import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -11,9 +10,9 @@ import java.util.Set;
  * Validator for German civilian licence plates.
  * <p>
  * Civilian plates are the standard licence plates used by private citizens and businesses.
- * Format: [Region Code]-[Identifier][Number][Modifier]
+ * Format: [Distinguisher Code]-[Identifier][Number][Modifier]
  * <ul>
- *   <li>Region: 1-3 letters (validated separately)</li>
+ *   <li>Distinguisher: 1-3 letters (validated separately)</li>
  *   <li>Identifier: 0-2 letters (no umlauts, no forbidden combinations)</li>
  *   <li>Number: 1-4 digits</li>
  *   <li>Modifier: Optional 'H' (historical) or 'E' (electric)</li>
@@ -36,7 +35,7 @@ public class CivilianPlateValidator {
     }
 
 
-    public Optional<LicencePlate> validate(Region region, String remainingPart, String modifier) {
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
         if (remainingPart.isEmpty()) {
             return Optional.empty();
         }
@@ -47,10 +46,10 @@ public class CivilianPlateValidator {
 
         // Handle dealer plate: no identifier, number starts with "06"
         if (identifier.isEmpty()) {
-            return dealerPlateValidator.validate(region, number, modifier);
+            return dealerPlateValidator.validate(distinguisher, number, modifier);
         }
 
-        return validateStandardPlate(region, identifier, number, modifier);
+        return validateStandardPlate(distinguisher, identifier, number, modifier);
     }
 
     private IdentifierExtractionResult extractIdentifier(String input) {
@@ -75,7 +74,7 @@ public class CivilianPlateValidator {
         return new IdentifierExtractionResult(identifier.toString(), remaining);
     }
 
-    private Optional<LicencePlate> validateStandardPlate(Region region, String identifier, String number, String modifier) {
+    private Optional<LicencePlate> validateStandardPlate(Distinguisher distinguisher, String identifier, String number, String modifier) {
         if (identifier.length() > MAX_IDENTIFIER_LENGTH) {
             return Optional.empty();
         }
@@ -84,16 +83,13 @@ public class CivilianPlateValidator {
             return Optional.empty();
         }
 
-        int totalLength = region.code.length() + identifier.length() + number.length() + modifier.length();
+        int totalLength = distinguisher.code.length() + identifier.length() + number.length() + modifier.length();
         if (totalLength > MAX_TOTAL_LENGTH) {
             return Optional.empty();
         }
 
-        return Optional.of(LicencePlate.of(region, identifier, number, modifier));
+        return Optional.of(LicencePlate.of(distinguisher, identifier, number, modifier));
     }
 
-    /**
-     * Helper record for identifier extraction results.
-     */
     private record IdentifierExtractionResult(String identifier, String remainingString) {}
 }

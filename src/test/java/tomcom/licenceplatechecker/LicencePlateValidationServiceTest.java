@@ -27,26 +27,26 @@ class LicencePlateValidationServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Load test regions
-        createRegion("SG", "Solingen, Stadt", false);
-        createRegion("L", "Leipzig", false);
-        createRegion("LI", "Lindau (Bodensee)", false);
-        createRegion("W", "Wuppertal, Stadt", false);
-        createRegion("B", "Berlin", false);
-        createRegion("ME", "Mettmann", false);
-        createRegion("Y", "Dienstfahrzeuge der Bundeswehr", true);
-        createRegion("BN", "Bonn, Stadt", false);
+        // Load test distinguishers
+        createDistinguisher("SG", "Solingen, Stadt", false);
+        createDistinguisher("L", "Leipzig", false);
+        createDistinguisher("LI", "Lindau (Bodensee)", false);
+        createDistinguisher("W", "Wuppertal, Stadt", false);
+        createDistinguisher("B", "Berlin", false);
+        createDistinguisher("ME", "Mettmann", false);
+        createDistinguisher("Y", "Dienstfahrzeuge der Bundeswehr", true);
+        createDistinguisher("BN", "Bonn, Stadt", false);
 
         entityManager.flush();
     }
 
-    private void createRegion(String code, String label, boolean special) {
-        Region region = new Region();
-        region.code = code;
-        region.label = label;
-        region.deprecated = false;
-        region.special = special;
-        entityManager.persist(region);
+    private void createDistinguisher(String code, String label, boolean special) {
+        Distinguisher distinguisher = new Distinguisher();
+        distinguisher.code = code;
+        distinguisher.label = label;
+        distinguisher.deprecated = false;
+        distinguisher.special = special;
+        entityManager.persist(distinguisher);
     }
 
     @Test
@@ -54,7 +54,7 @@ class LicencePlateValidationServiceTest {
         // Beispiel 1: Eingabe SGWP100, Ausgabe SG-WP100
         LicencePlate result = validationService.validateLicencePlate("W-SE515");
 
-        assertThat(result.getRegion().code).isEqualTo("W");
+        assertThat(result.getDistinguisher().code).isEqualTo("W");
         assertThat(result.getIdentifier()).isEqualTo("SE");
         assertThat(result.getNumber()).isEqualTo("515");
         assertThat(result.toString()).isEqualTo("W-SE515");
@@ -80,7 +80,7 @@ class LicencePlateValidationServiceTest {
         // Beispiel 4: Eingabe B-XY700, Ausgabe B-XY700
         LicencePlate result = validationService.validateLicencePlate("B-XY700");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEqualTo("XY");
         assertThat(result.getNumber()).isEqualTo("700");
         assertThat(result.toString()).isEqualTo("B-XY700");
@@ -91,7 +91,7 @@ class LicencePlateValidationServiceTest {
         // Beispiel 5: Eingabe ME AB 3333, Ausgabe ME-AB3333
         LicencePlate result = validationService.validateLicencePlate("ME AB 3333");
 
-        assertThat(result.getRegion().code).isEqualTo("ME");
+        assertThat(result.getDistinguisher().code).isEqualTo("ME");
         assertThat(result.getIdentifier()).isEqualTo("AB");
         assertThat(result.getNumber()).isEqualTo("3333");
         assertThat(result.toString()).isEqualTo("ME-AB3333");
@@ -102,7 +102,7 @@ class LicencePlateValidationServiceTest {
         // Beispiel 6: Eingabe B-NN 1234, Ausgabe B-NN1234
         LicencePlate result = validationService.validateLicencePlate("B-NN 1234");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEqualTo("NN");
         assertThat(result.getNumber()).isEqualTo("1234");
         assertThat(result.toString()).isEqualTo("B-NN1234");
@@ -121,7 +121,7 @@ class LicencePlateValidationServiceTest {
         // Beispiel 8: Eingabe Y123456, Ausgabe Y123456
         LicencePlate result = validationService.validateLicencePlate("Y123456");
 
-        assertThat(result.getRegion().code).isEqualTo("Y");
+        assertThat(result.getDistinguisher().code).isEqualTo("Y");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("123456");
         assertThat(result.toString()).isEqualTo("Y123456");
@@ -133,7 +133,7 @@ class LicencePlateValidationServiceTest {
         // Dealer plate (Händlerkennzeichen): no identifier, starts with 06
         LicencePlate result = validationService.validateLicencePlate("B06123");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("06123");
         assertThat(result.toString()).isEqualTo("B-06123");
@@ -144,7 +144,7 @@ class LicencePlateValidationServiceTest {
         // Dealer plate with separator
         LicencePlate result = validationService.validateLicencePlate("B-06123");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("06123");
         assertThat(result.toString()).isEqualTo("B-06123");
@@ -155,7 +155,7 @@ class LicencePlateValidationServiceTest {
         // Dealer plate with max 6 digits
         LicencePlate result = validationService.validateLicencePlate("ME-061234");
 
-        assertThat(result.getRegion().code).isEqualTo("ME");
+        assertThat(result.getDistinguisher().code).isEqualTo("ME");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("061234");
         assertThat(result.toString()).isEqualTo("ME-061234");
@@ -181,7 +181,7 @@ class LicencePlateValidationServiceTest {
         // Oldtimer red plate: starts with 07
         LicencePlate result = validationService.validateLicencePlate("B07456");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("07456");
         assertThat(result.toString()).isEqualTo("B-07456");
@@ -192,7 +192,7 @@ class LicencePlateValidationServiceTest {
         // Oldtimer red plate with separator
         LicencePlate result = validationService.validateLicencePlate("B-07456");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("07456");
         assertThat(result.toString()).isEqualTo("B-07456");
@@ -211,7 +211,7 @@ class LicencePlateValidationServiceTest {
         // Technical inspection plate: starts with 05
         LicencePlate result = validationService.validateLicencePlate("B05789");
 
-        assertThat(result.getRegion().code).isEqualTo("B");
+        assertThat(result.getDistinguisher().code).isEqualTo("B");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("05789");
         assertThat(result.toString()).isEqualTo("B-05789");
@@ -222,7 +222,7 @@ class LicencePlateValidationServiceTest {
         // Technical inspection plate with separator
         LicencePlate result = validationService.validateLicencePlate("W-051234");
 
-        assertThat(result.getRegion().code).isEqualTo("W");
+        assertThat(result.getDistinguisher().code).isEqualTo("W");
         assertThat(result.getIdentifier()).isEmpty();
         assertThat(result.getNumber()).isEqualTo("051234");
         assertThat(result.toString()).isEqualTo("W-051234");

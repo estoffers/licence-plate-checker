@@ -5,7 +5,7 @@ import jakarta.transaction.Transactional;
 
 @Transactional
 @Entity
-public class Region {
+public class Distinguisher {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;

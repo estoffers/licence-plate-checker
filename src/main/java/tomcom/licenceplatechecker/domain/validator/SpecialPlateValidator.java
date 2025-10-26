@@ -1,14 +1,14 @@
 package tomcom.licenceplatechecker.domain.validator;
 
 import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Region;
+import tomcom.licenceplatechecker.domain.Distinguisher;
 
 import java.util.Optional;
 
 /**
  * Coordinator validator for German special licence plates.
  * <p>
- * Delegates validation to specific validators based on the region code.
+ * Delegates validation to specific validators based on the distinguisher code.
  * Each special plate type has its own dedicated validator with specific rules.
  * </p>
  * <p>
@@ -38,30 +38,30 @@ public class SpecialPlateValidator {
         this.thwValidator = new ThwValidator();
     }
 
-    public Optional<LicencePlate> validate(Region region, String remainingPart, String modifier) {
-        return switch (region.code) {
-            case "Y" -> bundeswehrValidator.validate(region, remainingPart, modifier);
-            case "X" -> natoValidator.validate(region, remainingPart, modifier);
-            case "BP" -> federalPoliceValidator.validate(region, remainingPart, modifier);
-            case "THW" -> thwValidator.validate(region, remainingPart, modifier);
-            default -> validateGenericSpecial(region, remainingPart, modifier);
+    public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
+        return switch (distinguisher.code) {
+            case "Y" -> bundeswehrValidator.validate(distinguisher, remainingPart, modifier);
+            case "X" -> natoValidator.validate(distinguisher, remainingPart, modifier);
+            case "BP" -> federalPoliceValidator.validate(distinguisher, remainingPart, modifier);
+            case "THW" -> thwValidator.validate(distinguisher, remainingPart, modifier);
+            default -> validateGenericSpecial(distinguisher, remainingPart, modifier);
         };
     }
 
-    private Optional<LicencePlate> validateGenericSpecial(Region region, String remainingPart, String modifier) {
+    private Optional<LicencePlate> validateGenericSpecial(Distinguisher distinguisher, String remainingPart, String modifier) {
         // Generic special plates don't allow modifiers
         if (!modifier.isEmpty()) {
             return Optional.empty();
         }
 
-        if (!isValidNumericOnly(remainingPart, MAX_NUMBER_LENGTH_DEFAULT)) {
+        if (!isValidNumericOnly(remainingPart)) {
             return Optional.empty();
         }
 
-        return Optional.of(LicencePlate.of(region, "", remainingPart, ""));
+        return Optional.of(LicencePlate.of(distinguisher, "", remainingPart, ""));
     }
 
-    private boolean isValidNumericOnly(String number, int maxLength) {
+    private boolean isValidNumericOnly(String number) {
         if (number == null || number.isEmpty()) {
             return false;
         }
@@ -70,6 +70,6 @@ public class SpecialPlateValidator {
             return false;
         }
 
-        return number.length() <= maxLength;
+        return number.length() <= SpecialPlateValidator.MAX_NUMBER_LENGTH_DEFAULT;
     }
 }
