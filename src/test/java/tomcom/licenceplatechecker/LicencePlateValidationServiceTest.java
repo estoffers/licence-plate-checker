@@ -7,9 +7,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import tomcom.licenceplatechecker.domain.*;
-import tomcom.licenceplatechecker.domain.exception.AmbiguousLicencePlateException;
-import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.AmbiguousLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.InvalidLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.validator.LicencePlateValidationService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -54,9 +56,9 @@ class LicencePlateValidationServiceTest {
         // Beispiel 1: Eingabe SGWP100, Ausgabe SG-WP100
         LicencePlate result = validationService.validateLicencePlate("W-SE515");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("W");
-        assertThat(result.getIdentifier()).isEqualTo("SE");
-        assertThat(result.getNumber()).isEqualTo("515");
+        assertThat(result.distinguisher.code).isEqualTo("W");
+        assertThat(result.identifier).isEqualTo("SE");
+        assertThat(result.number).isEqualTo("515");
         assertThat(result.toString()).isEqualTo("W-SE515");
     }
 
@@ -80,9 +82,9 @@ class LicencePlateValidationServiceTest {
         // Beispiel 4: Eingabe B-XY700, Ausgabe B-XY700
         LicencePlate result = validationService.validateLicencePlate("B-XY700");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEqualTo("XY");
-        assertThat(result.getNumber()).isEqualTo("700");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEqualTo("XY");
+        assertThat(result.number).isEqualTo("700");
         assertThat(result.toString()).isEqualTo("B-XY700");
     }
 
@@ -91,9 +93,9 @@ class LicencePlateValidationServiceTest {
         // Beispiel 5: Eingabe ME AB 3333, Ausgabe ME-AB3333
         LicencePlate result = validationService.validateLicencePlate("ME AB 3333");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("ME");
-        assertThat(result.getIdentifier()).isEqualTo("AB");
-        assertThat(result.getNumber()).isEqualTo("3333");
+        assertThat(result.distinguisher.code).isEqualTo("ME");
+        assertThat(result.identifier).isEqualTo("AB");
+        assertThat(result.number).isEqualTo("3333");
         assertThat(result.toString()).isEqualTo("ME-AB3333");
     }
 
@@ -102,9 +104,9 @@ class LicencePlateValidationServiceTest {
         // Beispiel 6: Eingabe B-NN 1234, Ausgabe B-NN1234
         LicencePlate result = validationService.validateLicencePlate("B-NN 1234");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEqualTo("NN");
-        assertThat(result.getNumber()).isEqualTo("1234");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEqualTo("NN");
+        assertThat(result.number).isEqualTo("1234");
         assertThat(result.toString()).isEqualTo("B-NN1234");
     }
 
@@ -121,9 +123,9 @@ class LicencePlateValidationServiceTest {
         // Beispiel 8: Eingabe Y123456, Ausgabe Y123456
         LicencePlate result = validationService.validateLicencePlate("Y123456");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("Y");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("123456");
+        assertThat(result.distinguisher.code).isEqualTo("Y");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("123456");
         assertThat(result.toString()).isEqualTo("Y123456");
     }
 
@@ -133,9 +135,9 @@ class LicencePlateValidationServiceTest {
         // Dealer plate (Händlerkennzeichen): no identifier, starts with 06
         LicencePlate result = validationService.validateLicencePlate("B06123");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("06123");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("06123");
         assertThat(result.toString()).isEqualTo("B-06123");
     }
 
@@ -144,9 +146,9 @@ class LicencePlateValidationServiceTest {
         // Dealer plate with separator
         LicencePlate result = validationService.validateLicencePlate("B-06123");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("06123");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("06123");
         assertThat(result.toString()).isEqualTo("B-06123");
     }
 
@@ -155,9 +157,9 @@ class LicencePlateValidationServiceTest {
         // Dealer plate with max 6 digits
         LicencePlate result = validationService.validateLicencePlate("ME-061234");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("ME");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("061234");
+        assertThat(result.distinguisher.code).isEqualTo("ME");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("061234");
         assertThat(result.toString()).isEqualTo("ME-061234");
     }
 
@@ -181,9 +183,9 @@ class LicencePlateValidationServiceTest {
         // Oldtimer red plate: starts with 07
         LicencePlate result = validationService.validateLicencePlate("B07456");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("07456");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("07456");
         assertThat(result.toString()).isEqualTo("B-07456");
     }
 
@@ -192,9 +194,9 @@ class LicencePlateValidationServiceTest {
         // Oldtimer red plate with separator
         LicencePlate result = validationService.validateLicencePlate("B-07456");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("07456");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("07456");
         assertThat(result.toString()).isEqualTo("B-07456");
     }
 
@@ -211,9 +213,9 @@ class LicencePlateValidationServiceTest {
         // Technical inspection plate: starts with 05
         LicencePlate result = validationService.validateLicencePlate("B05789");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("B");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("05789");
+        assertThat(result.distinguisher.code).isEqualTo("B");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("05789");
         assertThat(result.toString()).isEqualTo("B-05789");
     }
 
@@ -222,9 +224,9 @@ class LicencePlateValidationServiceTest {
         // Technical inspection plate with separator
         LicencePlate result = validationService.validateLicencePlate("W-051234");
 
-        assertThat(result.getDistinguisher().code).isEqualTo("W");
-        assertThat(result.getIdentifier()).isEmpty();
-        assertThat(result.getNumber()).isEqualTo("051234");
+        assertThat(result.distinguisher.code).isEqualTo("W");
+        assertThat(result.identifier).isEmpty();
+        assertThat(result.number).isEqualTo("051234");
         assertThat(result.toString()).isEqualTo("W-051234");
     }
 

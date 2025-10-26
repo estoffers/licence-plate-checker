@@ -1,4 +1,4 @@
-package tomcom.licenceplatechecker.domain.validator;
+package tomcom.licenceplatechecker.domain.licenceplate.validator;
 
 import java.util.Set;
 

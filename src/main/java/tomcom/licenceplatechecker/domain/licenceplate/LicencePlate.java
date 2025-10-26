@@ -1,11 +1,11 @@
-package tomcom.licenceplatechecker.domain;
+package tomcom.licenceplatechecker.domain.licenceplate;
 
 public class LicencePlate {
 
-    private final Distinguisher distinguisher;
-    private final String identifier;
-    private final String number;
-    private final String modifier; // optional: "H" or "E"
+    public final Distinguisher distinguisher;
+    public final String identifier;
+    public final String number;
+    public final String modifier; // optional: "H" or "E"
 
     private LicencePlate(Distinguisher distinguisher, String identifier, String number, String modifier) {
         this.distinguisher = distinguisher;
@@ -16,22 +16,6 @@ public class LicencePlate {
 
     public static LicencePlate of(Distinguisher distinguisher, String identifier, String number, String modifier) {
         return new LicencePlate(distinguisher, identifier, number, modifier);
-    }
-
-    public Distinguisher getDistinguisher() {
-        return distinguisher;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public String getModifier() {
-        return modifier;
     }
 
     @Override

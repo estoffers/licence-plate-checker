@@ -1,4 +1,4 @@
-package tomcom.licenceplatechecker.domain;
+package tomcom.licenceplatechecker.domain.licenceplate;
 
 import org.springframework.data.repository.CrudRepository;
 

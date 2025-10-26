@@ -4,8 +4,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import tomcom.licenceplatechecker.domain.Distinguisher;
-import tomcom.licenceplatechecker.domain.DistinguisherRepository;
+import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.DistinguisherRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

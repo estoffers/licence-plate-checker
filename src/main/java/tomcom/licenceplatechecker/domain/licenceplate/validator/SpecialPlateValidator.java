@@ -1,7 +1,7 @@
-package tomcom.licenceplatechecker.domain.validator;
+package tomcom.licenceplatechecker.domain.licenceplate.validator;
 
-import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
 
 import java.util.Optional;
 

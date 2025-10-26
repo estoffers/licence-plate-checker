@@ -1,9 +1,9 @@
 package tomcom.licenceplatechecker.application;
 
-import tomcom.licenceplatechecker.domain.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
 
 public class LicencePlatePresenter {
-    public String present(LicencePlate validLicencePlate) {
+    public static String present(LicencePlate validLicencePlate) {
         return validLicencePlate.toString();
     }
 }

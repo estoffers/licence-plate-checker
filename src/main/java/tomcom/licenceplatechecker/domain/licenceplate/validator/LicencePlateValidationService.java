@@ -1,11 +1,11 @@
-package tomcom.licenceplatechecker.domain;
+package tomcom.licenceplatechecker.domain.licenceplate.validator;
 
 import org.springframework.stereotype.Service;
-import tomcom.licenceplatechecker.domain.exception.AmbiguousLicencePlateException;
-import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
-import tomcom.licenceplatechecker.domain.validator.CivilianPlateValidator;
-import tomcom.licenceplatechecker.domain.validator.ForbiddenCombinations;
-import tomcom.licenceplatechecker.domain.validator.SpecialPlateValidator;
+import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.DistinguisherRepository;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.AmbiguousLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.InvalidLicencePlateException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,8 +152,8 @@ public class LicencePlateValidationService {
 
         LicencePlate licencePlate = parsings.get(0);
 
-        String distinguisherCode = licencePlate.getDistinguisher().code;
-        String identifier = licencePlate.getIdentifier();
+        String distinguisherCode = licencePlate.distinguisher.code;
+        String identifier = licencePlate.identifier;
         String combinationKey = distinguisherCode + "-" + identifier;
 
         if (ForbiddenCombinations.isForbiddenIdentifier(identifier))

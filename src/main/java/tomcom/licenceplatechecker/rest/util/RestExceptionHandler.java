@@ -1,11 +1,11 @@
-package tomcom.licenceplatechecker.rest;
+package tomcom.licenceplatechecker.rest.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import tomcom.licenceplatechecker.domain.exception.AmbiguousLicencePlateException;
-import tomcom.licenceplatechecker.domain.exception.InvalidLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.AmbiguousLicencePlateException;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.InvalidLicencePlateException;
 
 @RestControllerAdvice
 class RestExceptionHandler {

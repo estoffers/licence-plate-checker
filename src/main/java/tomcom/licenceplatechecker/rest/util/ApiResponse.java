@@ -1,5 +1,5 @@
 
-package tomcom.licenceplatechecker.rest;
+package tomcom.licenceplatechecker.rest.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

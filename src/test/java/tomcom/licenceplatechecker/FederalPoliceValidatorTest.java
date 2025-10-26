@@ -6,9 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import tomcom.licenceplatechecker.domain.LicencePlate;
-import tomcom.licenceplatechecker.domain.Distinguisher;
-import tomcom.licenceplatechecker.domain.validator.FederalPoliceValidator;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.validator.FederalPoliceValidator;
 
 import java.util.Optional;
 
@@ -37,7 +37,7 @@ class FederalPoliceValidatorTest {
         Optional<LicencePlate> result = validator.validate(testDistinguisher, number, "");
         
         assertThat(result).isPresent();
-        assertThat(result.get().getNumber()).isEqualTo(number);
+        assertThat(result.get().number).isEqualTo(number);
         assertThat(validator.getVehicleType(number))
             .contains(FederalPoliceValidator.VehicleType.MOTORCYCLES);
     }
@@ -139,7 +139,7 @@ class FederalPoliceValidatorTest {
         Optional<LicencePlate> result = validator.validate(testDistinguisher, "601", "E");
         
         assertThat(result).isPresent();
-        assertThat(result.get().getModifier()).isEqualTo("E");
+        assertThat(result.get().modifier).isEqualTo("E");
         assertThat(validator.getVehicleType("601"))
             .contains(FederalPoliceValidator.VehicleType.ELECTRIC_VEHICLES);
     }

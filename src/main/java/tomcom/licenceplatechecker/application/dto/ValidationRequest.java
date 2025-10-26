@@ -1,4 +1,4 @@
-package tomcom.licenceplatechecker.rest;
+package tomcom.licenceplatechecker.application.dto;
 
 public class ValidationRequest {
 
