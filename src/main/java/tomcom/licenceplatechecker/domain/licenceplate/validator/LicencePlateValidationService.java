@@ -16,7 +16,6 @@ import java.util.Set;
 @Service
 public class LicencePlateValidationService {
 
-    private static final String ALLOWED_CHARACTERS_REGEX = "[A-Z0-9ÄÖÜ\\- ]+";
     private static final String DISTINGUISHER_CODE_REGEX = "[A-ZÄÖÜ]{1,3}";
 
     private static final int MAX_DISTINGUISHER_CODE_LENGTH = 3;
@@ -48,15 +47,7 @@ public class LicencePlateValidationService {
     }
 
     private String normalizeCase(String input) {
-        String normalized = input.toUpperCase(Locale.ROOT).trim();
-
-        if (!normalized.matches(ALLOWED_CHARACTERS_REGEX)) {
-            throw new InvalidLicencePlateException(
-                "Nur Buchstaben A-Z, Ziffern 0-9 sowie '-' und Leerzeichen erlaubt"
-            );
-        }
-
-        return normalized;
+        return input.toUpperCase(Locale.ROOT).trim();
     }
 
     private boolean containsSeparators(String input) {

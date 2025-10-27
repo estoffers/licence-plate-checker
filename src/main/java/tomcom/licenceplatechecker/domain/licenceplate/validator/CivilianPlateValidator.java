@@ -2,6 +2,7 @@ package tomcom.licenceplatechecker.domain.licenceplate.validator;
 
 import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
 import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
+import tomcom.licenceplatechecker.domain.licenceplate.exception.InvalidLicencePlateException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -63,7 +64,9 @@ public class CivilianPlateValidator {
             char currentChar = input.charAt(position);
             
             if (FORBIDDEN_UMLAUT_CHARS.contains(currentChar)) {
-                return new IdentifierExtractionResult("", input);
+                throw new InvalidLicencePlateException(
+                    "Nur Buchstaben A-Z, Ziffern 0-9 sowie '-' und Leerzeichen erlaubt"
+                );
             }
             
             identifier.append(currentChar);
