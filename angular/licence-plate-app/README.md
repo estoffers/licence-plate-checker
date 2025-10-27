@@ -1,59 +1,110 @@
-# LicencePlateApp
+# Licence Plate Checker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+A full-stack web application for validating and checking German licence plates (Kfz-Kennzeichen).
 
-## Development server
+## Overview
 
-To start a local development server, run:
+This application consists of:
+- **Backend**: Spring Boot application that provides REST APIs for licence plate validation
+- **Frontend**: Angular application with a user interface for checking licence plates
 
-```bash
-ng serve
-```
+## Prerequisites
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Java 17 or higher
+- Node.js and npm
+- Gradle (or use the included Gradle wrapper)
+- MySQL8 (or change to H2 db in application.properties)
 
-## Code scaffolding
+## Running the Application
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 1. Start the Backend (Spring Boot)
 
-```bash
-ng generate component component-name
-```
+Use the Spring Boot run configuration in your IDE to start the backend server.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Alternatively, you can run it from the command line:
 
 ```bash
-ng build
+./gradlew bootRun
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+The backend will start at  http://localhost:8085.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 2. Start the Frontend (Angular)
 
-```bash
-ng test
+Navigate to the Angular application directory and use the start script:
+
+```shell script
+cd angular/licence-plate-app
+npm run start
 ```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+The Angular development server will start and the application will be available at http://localhost:4220.
 
-```bash
-ng e2e
+## REST API Usage
+
+The application provides a REST API for validating licence plates.
+
+### Validate Licence Plate
+
+**Endpoint:** `POST /licence-plate/validate`
+
+**Request:**
+```json
+{
+  "licencePlate": "B-AB-1234"
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+**Response (Success):**
+```json
+{
+  "success": true,
+  "result": "B-AB1234"
+}
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+**Response (Error):**
+```json
+{
+  "success": false,
+  "error": "Invalid licence plate format"
+}
+```
+
+
+**Example using curl:**
+```shell script
+curl -X POST http://localhost:8080/licence-plate/validate \
+  -H "Content-Type: application/json" \
+  -d '{"licencePlate": "B-AB-1234"}'
+```
+
+
+## Features
+
+- Validate German licence plates
+- Check licence plate format and structure
+- Lookup distinguisher codes (Unterscheidungszeichen)
+- REST API for integration with other applications
+
+## Project Structure
+
+```
+licence-plate-checker/
+├── src/                          # Spring Boot backend source code
+│   ├── main/java/                # Java source files
+│   └── main/resources/           # Application properties and data files
+├── angular/licence-plate-app/    # Angular frontend application
+│   ├── src/                      # Angular source files
+│   └── package.json              # NPM dependencies and scripts
+└── build.gradle.kts              # Gradle build configuration
+```
+
+
+## Development
+
+The Angular application is configured with a proxy to forward API requests to the Spring Boot backend, allowing seamless development with both servers running locally.
