@@ -16,9 +16,8 @@ import java.util.Set;
 @Service
 public class LicencePlateValidationService {
 
-    private static final String ALLOWED_CHARACTERS_REGEX = "[A-Z0-9\\- ]+";
-    private static final String ALPHANUMERIC_ONLY_REGEX = "[A-Z0-9]+";
-    private static final String DISTINGUISHER_CODE_REGEX = "[A-Z]{1,3}";
+    private static final String ALLOWED_CHARACTERS_REGEX = "[A-Z0-9ÄÖÜ\\- ]+";
+    private static final String DISTINGUISHER_CODE_REGEX = "[A-ZÄÖÜ]{1,3}";
 
     private static final int MAX_DISTINGUISHER_CODE_LENGTH = 3;
     private static final Set<Character> VALID_MODIFIERS = Set.of('H', 'E');
@@ -88,10 +87,6 @@ public class LicencePlateValidationService {
     }
 
     private LicencePlate validateAndParseLicencePlate(String input, Distinguisher distinguisher) {
-        String normalized = removeSeparators(input);
-        if (!normalized.matches(ALPHANUMERIC_ONLY_REGEX))
-            throw new InvalidLicencePlateException("Nur Buchstaben A-Z und Ziffern 0-9 erlaubt");
-
         List<LicencePlate> validParsings = new ArrayList<>();
         if (distinguisher == null) {
             List<Distinguisher> distinguisherCandidates = findDistinguisherCandidates(input);

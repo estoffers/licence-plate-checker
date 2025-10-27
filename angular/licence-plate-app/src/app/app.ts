@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
     onCityCodeInput(event: Event): void {
         const input = event.target as HTMLInputElement;
-        input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+        input.value = input.value.toUpperCase().replace(/[^A-ZÄÖÜ]/g, '');
         this.form.get('cityCode')?.setValue(input.value, { emitEvent: false });
 
         // Auto-focus next field when max length reached
