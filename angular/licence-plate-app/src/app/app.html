@@ -1,0 +1,71 @@
+<main class="container">
+    <article class="licence-plate-container">
+        <section class="form-section">
+            <h1>Nummernschild prüfen</h1>
+            <p class="subtitle">Bitte Nummernschild eingeben</p>
+
+            <form [formGroup]="form" (ngSubmit)="validatePlate()">
+                <fieldset>
+                    <label for="plate-input">
+                        <input
+                            id="plate-input"
+                            type="text"
+                            formControlName="licensePlate"
+                            placeholder="Example: B-AB 1234"
+                            (keyup.enter)="validatePlate()"
+                            aria-label="Enter German licence plate"
+                        />
+                    </label>
+
+                    <button type="submit" [disabled]="isLoading || form.invalid" aria-label="Validate licence plate">
+                        {{ isLoading ? 'Prüfe...' : 'Überprüfen' }}
+                    </button>
+                </fieldset>
+            </form>
+
+            @if (error) {
+                <div class="error-message" role="alert">
+                    <p>{{ error }}</p>
+                </div>
+            }
+
+            @if (validationResult) {
+                <div class="result-section">
+                    <article class="result-card">
+                        <h3>Ergebnis</h3>
+                        <div class="plate-display">
+                            <code>{{ validationResult }}</code>
+                        </div>
+                        <p class="success-text">✓ Kennzeichen ist valide</p>
+                    </article>
+                </div>
+            }
+        </section>
+
+        <section class="info-section">
+            <details>
+                <summary>Hinweise zum Kennzeichen</summary>
+                <p>Deutsche (zivile) Kennzeichen bestehen aus:</p>
+                <ul>
+                    <li><strong>Unterscheidungszeichen:</strong> Zulassungsbezirk (1–3 Buchstaben)</li>
+                    <li><strong>Erkennungsnummer:</strong> 1–2 Buchstaben + 1–4 Ziffern</li>
+                    <li><strong>Zusatzkennzeichen (optional):</strong> „H“ (historisch) oder „E“ (elektrisch)</li>
+                </ul>
+                <p><strong>Beispiel:</strong> B-AB 1234 (Berlin)</p>
+                <p>
+                    Die Zuteilung und Verwendung von Kennzeichenkombinationen, die gegen die
+                    guten Sitten verstoßen oder geeignet sind, Anstoß zu erregen, ist unzulässig.
+                    Hierzu zählen insbesondere Kombinationen mit beleidigenden, diskriminierenden,
+                    extremistischen, verfassungsfeindlichen oder sonst sittlich anstößigen Inhalten
+                    (zB. herabwürdigende Wortfolgen, bekannte verbotene Abkürzungen oder Codes).
+                </p>
+                <p>
+                    Die zuständige Zulassungsbehörde kann derartige Kombinationen ablehnen oder
+                    entziehen. Nutzerinnen und Nutzer sind verpflichtet, bei der Auswahl und Eingabe
+                    von Wunschkennzeichen auf die Einhaltung der rechtlichen Vorgaben und der
+                    guten Sitten zu achten.
+                </p>
+            </details>
+        </section>
+    </article>
+</main>

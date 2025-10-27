@@ -73,11 +73,11 @@ public class LicencePlateValidationService {
 
         String distinguisherCode = input.substring(0, separatorIndex).trim();
         if (!distinguisherCode.matches(DISTINGUISHER_CODE_REGEX))
-            throw new InvalidLicencePlateException(String.format("Distinguisher code '%s' does not match pattern", distinguisherCode));
+            throw new InvalidLicencePlateException(String.format("Unterscheidungszeichen %s ungültig", distinguisherCode));
 
         Optional<Distinguisher> distinguisherOpt = distinguisherRepository.findByCode(distinguisherCode);
         if (distinguisherOpt.isEmpty())
-            throw new InvalidLicencePlateException(String.format("No distinguisher found for code %s", distinguisherCode));
+            throw new InvalidLicencePlateException(String.format("Kein Unterscheidungszeichen %s gefunden", distinguisherCode));
 
         return distinguisherOpt.get();
     }
@@ -91,7 +91,7 @@ public class LicencePlateValidationService {
         if (distinguisher == null) {
             List<Distinguisher> distinguisherCandidates = findDistinguisherCandidates(input);
             if (distinguisherCandidates.isEmpty())
-                throw new InvalidLicencePlateException("Unbekanntes Distinguisheral-Kürzel");
+                throw new InvalidLicencePlateException("Unbekanntes Unterscheidungszeichen");
 
             for (Distinguisher distinguisherCandidate : distinguisherCandidates) {
                 String remaining = input.substring(distinguisherCandidate.code.length());
@@ -157,9 +157,9 @@ public class LicencePlateValidationService {
         String combinationKey = distinguisherCode + "-" + identifier;
 
         if (ForbiddenCombinations.isForbiddenIdentifier(identifier))
-            throw new InvalidLicencePlateException(String.format("Illegal identifier '%s' for distinguisher '%s'", identifier, distinguisherCode));
+            throw new InvalidLicencePlateException(String.format("Erkennungsnummer %s ist nicht erlaubt", identifier));
         if (ForbiddenCombinations.isForbiddenPair(combinationKey))
-            throw new InvalidLicencePlateException(String.format("Illegal combination %s'", combinationKey));
+            throw new InvalidLicencePlateException(String.format("Kombination %s ist nicht erlaubt", combinationKey));
         return licencePlate;
     }
 

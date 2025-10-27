@@ -48,8 +48,8 @@ public class SpecialPlateValidator {
         };
     }
 
+    //TODO: Implement other cases
     private Optional<LicencePlate> validateGenericSpecial(Distinguisher distinguisher, String remainingPart, String modifier) {
-        // Generic special plates don't allow modifiers
         if (!modifier.isEmpty()) {
             return Optional.empty();
         }

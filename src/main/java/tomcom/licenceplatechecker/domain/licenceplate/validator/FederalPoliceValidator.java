@@ -1,7 +1,7 @@
 package tomcom.licenceplatechecker.domain.licenceplate.validator;
 
-import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
 import tomcom.licenceplatechecker.domain.licenceplate.Distinguisher;
+import tomcom.licenceplatechecker.domain.licenceplate.LicencePlate;
 
 import java.util.Optional;
 import java.util.Set;
@@ -62,14 +62,6 @@ public class FederalPoliceValidator {
         new VehicleTypeRange(60, 61, VehicleType.ELECTRIC_VEHICLES)
     );
 
-    /**
-     * Validates and parses a Federal Police licence plate.
-     *
-     * @param distinguisher the distinguisher (should be "BP")
-     * @param remainingPart the numeric part after the distinguisher code
-     * @param modifier the modifier (only "E" allowed for electric vehicles 60-61)
-     * @return Optional containing the LicencePlate if valid, empty otherwise
-     */
     public Optional<LicencePlate> validate(Distinguisher distinguisher, String remainingPart, String modifier) {
         // Must be only digits
         if (!remainingPart.matches("[0-9]+")) {
@@ -91,11 +83,9 @@ public class FederalPoliceValidator {
             return Optional.empty();
         }
 
-        // Extract vehicle type code (first 2 digits)
         String vehicleTypeCode = remainingPart.substring(0, 2);
         int vehicleType = Integer.parseInt(vehicleTypeCode);
 
-        // Validate vehicle type code
         VehicleTypeRange vehicleTypeRange = getVehicleTypeRange(vehicleType);
         if (vehicleTypeRange == null) {
             return Optional.empty();
@@ -108,7 +98,6 @@ public class FederalPoliceValidator {
             return Optional.empty();
         }
 
-        // Validate modifier
         if (!modifier.isEmpty()) {
             // Only electric vehicles (60-61) can have E modifier
             if (vehicleTypeRange.type() != VehicleType.ELECTRIC_VEHICLES || !modifier.equals("E")) {
@@ -140,12 +129,6 @@ public class FederalPoliceValidator {
         return value >= RED_PLATE_MIN && value <= RED_PLATE_MAX;
     }
 
-    /**
-     * Gets the vehicle type range for a given vehicle type code.
-     *
-     * @param vehicleTypeCode the 2-digit vehicle type code
-     * @return the VehicleTypeRange if valid, null otherwise
-     */
     private VehicleTypeRange getVehicleTypeRange(int vehicleTypeCode) {
         return VEHICLE_TYPE_RANGES.stream()
             .filter(range -> vehicleTypeCode >= range.min() && vehicleTypeCode <= range.max())
@@ -153,12 +136,6 @@ public class FederalPoliceValidator {
             .orElse(null);
     }
 
-    /**
-     * Gets the vehicle type for a given licence plate number.
-     *
-     * @param number the BP plate number (without BP prefix)
-     * @return Optional containing the VehicleType if determinable
-     */
     public Optional<VehicleType> getVehicleType(String number) {
         if (number == null || number.length() < 2) {
             return Optional.empty();
@@ -176,74 +153,20 @@ public class FederalPoliceValidator {
         VehicleTypeRange range = getVehicleTypeRange(code);
         return range != null ? Optional.of(range.type()) : Optional.empty();
     }
-
-    /**
-     * Record representing a vehicle type code range.
-     */
     private record VehicleTypeRange(int min, int max, VehicleType type) {}
 
-    /**
-     * Enum representing different Federal Police vehicle types.
-     */
     public enum VehicleType {
-        /**
-         * 10-12: Motorcycles
-         */
         MOTORCYCLES,
-
-        /**
-         * 15-19: Passenger cars (PKW)
-         */
         PASSENGER_CARS,
-
-        /**
-         * 20-24: Off-road passenger cars
-         */
         OFFROAD_PASSENGER_CARS,
-
-        /**
-         * 25-29: Light trucks (LKW)
-         */
         LIGHT_TRUCKS,
-
-        /**
-         * 30-34: Off-road vehicles up to 2t payload, light transporters
-         */
         OFFROAD_LIGHT,
-
-        /**
-         * 35-39: Trucks up to 6t payload
-         */
         TRUCKS_UP_TO_6T,
-
-        /**
-         * 40-44: Off-road trucks up to 6t payload
-         */
         OFFROAD_TRUCKS_UP_TO_6T,
-
-        /**
-         * 45-49: Trucks over 6t payload, heavy transporters, buses (KOM)
-         */
         HEAVY_TRUCKS_BUSES,
-
-        /**
-         * 50-54: Armored vehicles, protected special vehicles
-         */
         ARMORED_VEHICLES,
-
-        /**
-         * 55-59: Trailers
-         */
         TRAILERS,
-
-        /**
-         * 60-61: Electric vehicles (require E modifier)
-         */
         ELECTRIC_VEHICLES,
-
-        /**
-         * 0600-0699: Test drive plates
-         */
         TEST_DRIVE
     }
 }
