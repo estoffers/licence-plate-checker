@@ -1,25 +1,49 @@
 <main class="container">
     <article class="licence-plate-container">
         <section class="form-section">
-            <h1>Nummernschild prüfen</h1>
-            <p class="subtitle">Bitte Nummernschild eingeben</p>
+            <h1>Kennzeichen überprüfen</h1>
+            <p class="subtitle">Überprüfen Sie die Gültigkeit Ihres Wunschkennzeichens</p>
 
             <form [formGroup]="form" (ngSubmit)="validatePlate()">
                 <fieldset>
-                    <label for="plate-input">
+                    <div class="licence-plate-input">
                         <input
-                            id="plate-input"
+                            id="city-code"
                             type="text"
-                            formControlName="licensePlate"
-                            placeholder="Example: B-AB 1234"
-                            (keyup.enter)="validatePlate()"
-                            aria-label="Enter German licence plate"
+                            formControlName="cityCode"
+                            placeholder="B"
+                            maxlength="3"
+                            class="distinguisher-input"
+                            (input)="onCityCodeInput($event)"
+                            aria-label="City code"
                         />
-                    </label>
-
-                    <button type="submit" [disabled]="isLoading || form.invalid" aria-label="Validate licence plate">
-                        {{ isLoading ? 'Prüfe...' : 'Überprüfen' }}
-                    </button>
+                        <input
+                            id="letters"
+                            type="text"
+                            formControlName="letters"
+                            placeholder="AB"
+                            maxlength="2"
+                            class="identifier-input"
+                            (input)="onLettersInput($event)"
+                            aria-label="Letters"
+                        />
+                        <input
+                            id="numbers"
+                            type="text"
+                            formControlName="numbers"
+                            placeholder="1234"
+                            maxlength="4"
+                            class="numbers-input"
+                            (keyup.enter)="validatePlate()"
+                            aria-label="Numbers"
+                        />
+                    </div>
+                    <div class="button-wrapper">
+                        <button type="submit" [disabled]="isLoading || form.invalid"
+                                aria-label="Validate licence plate">
+                            {{ isLoading ? 'Prüfe...' : 'Gültigkeit prüfen' }}
+                        </button>
+                    </div>
                 </fieldset>
             </form>
 
@@ -49,7 +73,7 @@
                 <ul>
                     <li><strong>Unterscheidungszeichen:</strong> Zulassungsbezirk (1–3 Buchstaben)</li>
                     <li><strong>Erkennungsnummer:</strong> 1–2 Buchstaben + 1–4 Ziffern</li>
-                    <li><strong>Zusatzkennzeichen (optional):</strong> „H“ (historisch) oder „E“ (elektrisch)</li>
+                    <li><strong>Zusatzkennzeichen (optional):</strong> „H" (historisch) oder „E" (elektrisch)</li>
                 </ul>
                 <p><strong>Beispiel:</strong> B-AB 1234 (Berlin)</p>
                 <p>

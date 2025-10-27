@@ -68,6 +68,7 @@ public class LicencePlateValidationService {
         return input.replace("-", "").replace(" ", "");
     }
 
+    //TODO: Improve detection of distinguisher when a code exists as a civilian and special case, eg. B
     private Distinguisher getDistinguisher(String input) {
         int separatorIndex = findFirstSeparatorIndex(input);
 
@@ -75,7 +76,11 @@ public class LicencePlateValidationService {
         if (!distinguisherCode.matches(DISTINGUISHER_CODE_REGEX))
             throw new InvalidLicencePlateException(String.format("Unterscheidungszeichen %s ungültig", distinguisherCode));
 
-        Optional<Distinguisher> distinguisherOpt = distinguisherRepository.findByCode(distinguisherCode);
+        Optional<Distinguisher> distinguisherOpt = distinguisherRepository.findByCodeAndDeprecatedAndSpecial(distinguisherCode, false, false);
+        if (distinguisherOpt.isEmpty())
+            distinguisherOpt = distinguisherRepository.findByCodeAndDeprecatedAndSpecial(distinguisherCode, true, false);
+        if (distinguisherOpt.isEmpty())
+            distinguisherOpt = distinguisherRepository.findByCodeAndDeprecatedAndSpecial(distinguisherCode, false, true);
         if (distinguisherOpt.isEmpty())
             throw new InvalidLicencePlateException(String.format("Kein Unterscheidungszeichen %s gefunden", distinguisherCode));
 
@@ -138,7 +143,7 @@ public class LicencePlateValidationService {
 
         for (int length = 1; length <= maxLength; length++) {
             String potentialCode = input.substring(0, length);
-            distinguisherRepository.findByCode(potentialCode).ifPresent(candidates::add);
+            distinguisherRepository.findByCodeAndDeprecated(potentialCode, false).ifPresent(candidates::add);
         }
 
         return candidates;

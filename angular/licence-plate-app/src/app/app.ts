@@ -22,11 +22,35 @@ export class AppComponent implements OnInit {
         private licencePlateService: LicencePlateService
     ) {
         this.form = this.fb.group({
-            licensePlate: ['', [Validators.required, Validators.minLength(2)]],
+            cityCode: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
+            letters: ['', [Validators.maxLength(2)]],
+            numbers: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
         });
     }
 
     ngOnInit(): void {
+    }
+
+    onCityCodeInput(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+        this.form.get('cityCode')?.setValue(input.value, { emitEvent: false });
+
+        // Auto-focus next field when max length reached
+        if (input.value.length === 3) {
+            document.getElementById('letters')?.focus();
+        }
+    }
+
+    onLettersInput(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+        this.form.get('letters')?.setValue(input.value, { emitEvent: false });
+
+        // Auto-focus next field when max length reached
+        if (input.value.length === 2) {
+            document.getElementById('numbers')?.focus();
+        }
     }
 
     validatePlate(): void {
@@ -38,7 +62,11 @@ export class AppComponent implements OnInit {
         this.error = null;
         this.validationResult = null;
 
-        const licensePlate: string = this.form.get('licensePlate')?.value.trim();
+        const cityCode = this.form.get('cityCode')?.value.trim();
+        const letters = this.form.get('letters')?.value.trim();
+        const numbers = this.form.get('numbers')?.value.trim();
+
+        const licensePlate = `${cityCode}-${letters} ${numbers}`;
 
         this.licencePlateService.validateLicencePlate(licensePlate).subscribe({
             next: (response: ApiResponse<string>) => {
